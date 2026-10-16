@@ -1,0 +1,29 @@
+{
+  "name": "tamil-skribbl",
+  "version": "1.0.0",
+  "description": "வரைந்து கண்டுபிடி! — skribbl.io-style Tamil drawing & guessing game",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test/game.test.js",
+    "build-words": "node data/build-words.js",
+    "screenshots": "node test/screenshots.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^5.3.0",
+    "socket.io": "^4.8.4"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.64.1",
+    "socket.io-client": "^4.8.4"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
