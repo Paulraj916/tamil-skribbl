@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ta">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+<title>வரைந்து கண்டுபிடி! · Varainthu Kandupidi</title>
+<meta name="description" content="Tamil drawing & guessing game for the family — like skribbl.io, with Tamil words.">
+<meta name="theme-color" content="#3b2a8f">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="bg"></div>
+
+<!-- ============ HOME ============ -->
+<section id="home" class="screen active">
+  <div class="home-top">
+    <button class="lang-btn" data-action="lang" title="Language">அ / A</button>
+  </div>
+  <h1 class="logo" id="logo"></h1>
+  <div class="logo-sub">Varainthu Kandupidi · <span data-i18n="tagline"></span></div>
+
+  <div class="home-card">
+    <div class="name-row">
+      <input id="nameInput" maxlength="20" autocomplete="nickname" data-i18n-ph="enterName">
+    </div>
+    <div class="avatar-maker">
+      <div class="am-col">
+        <button class="am-arrow" data-av="eyes" data-d="-1">◀</button>
+        <button class="am-arrow" data-av="mouth" data-d="-1">◀</button>
+        <button class="am-arrow" data-av="extra" data-d="-1">◀</button>
+      </div>
+      <div class="am-face"><div id="avatarPreview"></div>
+        <div class="am-colors" id="avatarColors"></div>
+      </div>
+      <div class="am-col">
+        <button class="am-arrow" data-av="eyes" data-d="1">▶</button>
+        <button class="am-arrow" data-av="mouth" data-d="1">▶</button>
+        <button class="am-arrow" data-av="extra" data-d="1">▶</button>
+      </div>
+      <button class="am-random" id="avatarRandom" title="Random">🎲</button>
+    </div>
+    <div class="am-labels"><span data-i18n="eyes"></span> · <span data-i18n="mouth"></span> · <span data-i18n="extra"></span></div>
+
+    <button class="btn btn-green big" id="joinInviteBtn" hidden></button>
+    <button class="btn btn-blue big" id="createBtn" data-i18n="createRoom"></button>
+    <div class="join-row">
+      <input id="codeInput" maxlength="12" autocapitalize="characters" data-i18n-ph="roomCode">
+      <button class="btn btn-green" id="joinBtn" data-i18n="join"></button>
+    </div>
+    <div class="home-error" id="homeError"></div>
+  </div>
+
+  <div class="how">
+    <div class="how-step"><div class="how-ico">✏️</div><b data-i18n="how1t"></b><span data-i18n="how1"></span></div>
+    <div class="how-step"><div class="how-ico">💬</div><b data-i18n="how2t"></b><span data-i18n="how2"></span></div>
+    <div class="how-step"><div class="how-ico">🏆</div><b data-i18n="how3t"></b><span data-i18n="how3"></span></div>
+  </div>
+  <div class="home-foot"><span id="wordCountNote"></span></div>
+</section>
+
+<!-- ============ GAME ============ -->
+<section id="game" class="screen">
+  <header class="topbar">
+    <div class="clock" id="clock"><svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="19" class="clock-bg"/><circle cx="22" cy="22" r="19" class="clock-fg" id="clockArc"/></svg><span id="clockText">--</span></div>
+    <div class="round-info" id="roundInfo"></div>
+    <div class="word-area" id="wordArea"></div>
+    <div class="top-actions">
+      <button class="icon-btn" data-action="sound" id="soundBtn" title="Sound">🔊</button>
+      <button class="icon-btn lang-btn" data-action="lang" title="Language">அ/A</button>
+      <button class="icon-btn" data-action="leave" title="Leave">🚪</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="players" id="players"></aside>
+
+    <div class="stage-wrap">
+      <div class="stage" id="stage">
+        <canvas id="canvas" width="800" height="600"></canvas>
+        <div class="rate" id="rateBox" hidden>
+          <button class="rate-btn" data-rate="1" title="Like">👍</button>
+          <button class="rate-btn" data-rate="0" title="Dislike">👎</button>
+        </div>
+        <div class="overlay" id="overlay" hidden><div class="overlay-inner" id="overlayInner"></div></div>
+        <div class="lobby" id="lobby" hidden></div>
+      </div>
+      <div class="toolbar" id="toolbar" hidden>
+        <div class="tb-current" id="tbCurrent" title="Current colour"><div id="tbCurrentDot"></div></div>
+        <div class="palette" id="palette"></div>
+        <label class="custom-color" title="Custom colour"><input type="color" id="customColor" value="#ff6f00"><span>🎨</span></label>
+        <div class="tb-group sizes" id="sizes"></div>
+        <input type="range" id="sizeSlider" min="2" max="60" value="8" class="size-slider" title="Brush size">
+        <div class="tb-group tools">
+          <button class="tool active" data-tool="pen" title="Pen (B)">✏️</button>
+          <button class="tool" data-tool="eraser" title="Eraser (E)">🧽</button>
+          <button class="tool" data-tool="fill" title="Fill (F)">🪣</button>
+          <button class="tool" data-act="undo" title="Undo (Ctrl+Z)">↩️</button>
+          <button class="tool" data-act="clear" title="Clear">🗑️</button>
+        </div>
+      </div>
+    </div>
+
+    <aside class="chat">
+      <div class="chat-log" id="chatLog"></div>
+      <form class="chat-form" id="chatForm" autocomplete="off">
+        <button type="button" class="mic-lang" id="micLang" hidden title="Voice language">த</button>
+        <button type="button" class="mic-btn" id="micBtn" hidden aria-label="Voice guess">🎤</button>
+        <input id="chatInput" maxlength="120" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="send">
+        <button type="submit" class="send-btn" aria-label="Send">➤</button>
+      </form>
+    </aside>
+  </main>
+  <div class="popover" id="popover" hidden></div>
+  <div class="toast" id="toast" hidden></div>
+</section>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="avatar.js"></script>
+<script src="i18n.js"></script>
+<script src="sound.js"></script>
+<script src="voice.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
