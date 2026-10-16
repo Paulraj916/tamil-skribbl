@@ -1,0 +1,855 @@
+# animals|Animals|விலங்குகள்
+யானை|elephant|yaanai|e
+சிங்கம்|lion|singam|e
+புலி|tiger|puli|e
+குரங்கு|monkey|kurangu|e
+நாய்|dog|naai|e
+பூனை|cat|poonai|e
+பசு|cow|pasu|e
+எருமை|buffalo|erumai|m
+ஆடு|goat|aadu|e
+செம்மறி ஆடு|sheep|semmari aadu|m
+குதிரை|horse|kuthirai|e
+கழுதை|donkey|kazhuthai|m
+ஒட்டகம்|camel|ottagam|e
+மான்|deer|maan|e
+முயல்|rabbit|muyal|e
+எலி|rat|eli|e
+அணில்|squirrel|anil|m
+கரடி|bear|karadi|e
+நரி|fox|nari|m
+ஓநாய்|wolf|oonaai|m
+பன்றி|pig|panri|e
+ஒட்டகச்சிவிங்கி|giraffe|ottagachivingi|m
+வரிக்குதிரை|zebra|varikkuthirai|m
+காண்டாமிருகம்|rhinoceros/rhino|kaandaamirugam|h
+நீர்யானை|hippopotamus/hippo|neeryaanai|h
+கங்காரு|kangaroo|kangaaru|m
+பாம்பு|snake|paambu|e
+தவளை|frog|thavalai|e
+ஆமை|tortoise/turtle|aamai|e
+முதலை|crocodile|muthalai|m
+பல்லி|lizard|palli|m
+ஓணான்|garden lizard/chameleon|oonaan|h
+வௌவால்|bat|vauvaal|m
+கீரி|mongoose|keeri|h
+சிறுத்தை|leopard/cheetah|siruthai|m
+காளை|bull|kaalai|m
+கன்றுக்குட்டி|calf|kanrukkutti|m
+பென்குயின்|penguin|penguin|m
+பாண்டா|panda|paandaa|m
+கொரில்லா|gorilla|gorillaa|m
+முள்ளம்பன்றி|porcupine|mullampanri|h
+நத்தை|snail|naththai|m
+மண்புழு|earthworm/worm|manpuzhu|m
+டைனோசர்|dinosaur|dainosar|m
+நாய்க்குட்டி|puppy|naaikkutti|m
+பூனைக்குட்டி|kitten|poonaikkutti|m
+யாக்|yak|yaak|h
+டிராகன்|dragon|draagan|m
+# birds|Birds|பறவைகள்
+கோழி|hen/chicken|kozhi|e
+சேவல்|rooster/cock|seval|e
+வாத்து|duck|vaaththu|e
+மயில்|peacock|mayil|e
+கிளி|parrot|kili|e
+காகம்|crow|kaagam|e
+புறா|pigeon/dove|puraa|e
+கழுகு|eagle|kazhugu|m
+ஆந்தை|owl|aanthai|e
+குருவி|sparrow|kuruvi|m
+கொக்கு|crane/heron|kokku|m
+அன்னம்|swan|annam|m
+வான்கோழி|turkey|vaankozhi|m
+தீக்கோழி|ostrich|theekkozhi|m
+மரங்கொத்தி|woodpecker|marangoththi|h
+குயில்|cuckoo/koel|kuyil|m
+மைனா|myna|mainaa|m
+பருந்து|hawk|parunthu|h
+இறகு|feather|iragu|m
+முட்டை|egg|muttai|e
+கூடு|nest|koodu|m
+மீன்கொத்தி|kingfisher|meenkoththi|h
+பிளமிங்கோ|flamingo|flamingo|h
+# sea|Sea creatures & insects|கடல்வாழ் உயிரினங்கள் & பூச்சிகள்
+மீன்|fish|meen|e
+சுறா|shark|suraa|m
+திமிங்கலம்|whale|thimingalam|m
+டால்பின்|dolphin|daalphin|m
+நண்டு|crab|nandu|e
+இறால்|prawn/shrimp|iraal|m
+ஆக்டோபஸ்|octopus|aaktopas|m
+நட்சத்திர மீன்|starfish|natchaththira meen|m
+சிப்பி|oyster/shell|sippi|m
+சங்கு|conch|sangu|m
+ஜெல்லி மீன்|jellyfish|jelli meen|h
+கடல் குதிரை|seahorse|kadal kuthirai|h
+பட்டாம்பூச்சி|butterfly|pattaampoochi|e
+தேனீ|bee|thenee|e
+எறும்பு|ant|erumbu|e
+கொசு|mosquito|kosu|e
+ஈ|housefly|ee|m
+சிலந்தி|spider|silanthi|e
+கரப்பான் பூச்சி|cockroach|karappaan poochi|m
+வெட்டுக்கிளி|grasshopper|vettukkili|m
+மின்மினிப் பூச்சி|firefly|minminip poochi|h
+தேள்|scorpion|thel|m
+பூரான்|centipede|pooraan|h
+கம்பளிப்பூச்சி|caterpillar|kambalippoochi|h
+தட்டான்|dragonfly|thattaan|h
+சிலந்தி வலை|spider web/cobweb|silanthi valai|m
+தேன்கூடு|beehive|thenkoodu|m
+பொன்வண்டு|ladybug/beetle|ponvandu|h
+# fruits|Fruits & nuts|பழங்கள்
+ஆப்பிள்|apple|aappil|e
+வாழைப்பழம்|banana|vaazhaippazham|e
+மாம்பழம்|mango|maampazham|e
+பலாப்பழம்|jackfruit|palaappazham|m
+திராட்சை|grapes|thiraatchai|e
+ஆரஞ்சு|orange|aaranju|e
+எலுமிச்சை|lemon|elumichai|e
+தர்பூசணி|watermelon|tharpoosani|e
+அன்னாசி|pineapple|annaasi|m
+பப்பாளி|papaya|pappaali|m
+மாதுளை|pomegranate|maathulai|m
+கொய்யா|guava|koyyaa|m
+தேங்காய்|coconut|thengaai|e
+ஸ்ட்ராபெர்ரி|strawberry|straaberri|m
+செர்ரி|cherry|cherri|m
+சப்போட்டா|sapota/chikoo|sappottaa|h
+நாவல் பழம்|jamun|naaval pazham|h
+பேரிக்காய்|pear|perikkaai|m
+சீதாப்பழம்|custard apple|seethaappazham|h
+பேரீச்சம்பழம்|dates|pereechampazham|h
+நெல்லிக்காய்|gooseberry/amla|nellikkaai|h
+கிர்ணி பழம்|muskmelon|kirni pazham|h
+அத்திப்பழம்|fig|aththippazham|h
+இளநீர்|tender coconut|ilaneer|m
+கரும்பு|sugarcane|karumbu|m
+முந்திரி|cashew|munthiri|m
+வேர்க்கடலை|peanut/groundnut|verkkadalai|m
+அவகேடோ|avocado|avakedo|h
+# vegetables|Vegetables|காய்கறிகள்
+தக்காளி|tomato|thakkaali|e
+உருளைக்கிழங்கு|potato|urulaikkizhangu|e
+வெங்காயம்|onion|vengaayam|e
+கேரட்|carrot|kerat|e
+கத்தரிக்காய்|brinjal/eggplant|kaththarikkaai|m
+வெண்டைக்காய்|ladies finger/okra|vendaikkaai|m
+முருங்கைக்காய்|drumstick|murungaikkaai|m
+பாகற்காய்|bitter gourd|paagarkaai|h
+மிளகாய்|chilli|milagaai|e
+பூண்டு|garlic|poondu|m
+இஞ்சி|ginger|inji|m
+முட்டைக்கோஸ்|cabbage|muttaikkos|m
+காலிஃபிளவர்|cauliflower|kaaliflavar|m
+பீட்ரூட்|beetroot|beetroot|m
+வெள்ளரிக்காய்|cucumber|vellarikkaai|m
+பூசணிக்காய்|pumpkin|poosanikkaai|m
+சோளம்|corn|solam|e
+பட்டாணி|peas|pattaani|m
+பீன்ஸ்|beans|beens|m
+முள்ளங்கி|radish|mullangi|m
+கீரை|spinach/greens|keerai|m
+காளான்|mushroom|kaalaan|e
+குடைமிளகாய்|capsicum|kudaimilagaai|m
+சுரைக்காய்|bottle gourd|suraikkaai|h
+புடலங்காய்|snake gourd|pudalangaai|h
+வாழைக்காய்|raw banana|vaazhaikkaai|h
+கறிவேப்பிலை|curry leaves|kariveppilai|h
+கொத்தமல்லி|coriander|koththamalli|m
+# food|Food & dishes|உணவு
+இட்லி|idli|itli|e
+தோசை|dosa|thosai|e
+வடை|vada|vadai|e
+சர்க்கரைப் பொங்கல்|sweet pongal|sarkkaraip pongal|m
+சாம்பார்|sambar|saambaar|e
+ரசம்|rasam|rasam|m
+சட்னி|chutney|chatni|m
+சாதம்|rice|saatham|e
+பிரியாணி|biryani|biriyaani|e
+பரோட்டா|parotta|parottaa|e
+சப்பாத்தி|chapati|chappaaththi|e
+பூரி|poori|poori|e
+உப்புமா|upma|uppumaa|m
+பாயசம்|payasam|paayasam|m
+லட்டு|laddu|lattu|e
+ஜிலேபி|jalebi|jilebi|m
+அல்வா|halwa|alvaa|m
+முறுக்கு|murukku|murukku|m
+அப்பளம்|papad/appalam|appalam|m
+பணியாரம்|paniyaram|paniyaaram|h
+ஆப்பம்|appam|aappam|m
+இடியாப்பம்|idiyappam/string hoppers|idiyaappam|h
+கொழுக்கட்டை|kozhukattai|kozhukkattai|h
+தயிர்|curd/yogurt|thayir|m
+பால்|milk|paal|e
+மோர்|buttermilk|mor|m
+வெண்ணெய்|butter|vennei|m
+நெய்|ghee|nei|m
+தேன்|honey|then|m
+ரொட்டி|bread|rotti|e
+கேக்|cake|kek|e
+பிஸ்கட்|biscuit|biskat|e
+ஐஸ்கிரீம்|ice cream|aiskreem|e
+சாக்லேட்|chocolate|chaaklet|e
+மிட்டாய்|candy/sweet|mittaai|e
+பீட்சா|pizza|peetsaa|e
+பர்கர்|burger|burgar|e
+நூடுல்ஸ்|noodles|noodles|e
+சமோசா|samosa|samosaa|e
+பாப்கார்ன்|popcorn|paapkaarn|m
+காபி|coffee|kaapi|e
+டீ|tea|tee|e
+ஜூஸ்|juice|joos|e
+சர்க்கரை|sugar|sarkkarai|m
+உப்பு|salt|uppu|m
+மிளகு|pepper|milagu|m
+மஞ்சள்|turmeric|manjal|m
+ஊறுகாய்|pickle|oorugaai|m
+சுண்டல்|sundal|sundal|h
+பஜ்ஜி|bajji|bajji|m
+போண்டா|bonda|bondaa|m
+கேசரி|kesari|kesari|m
+மைசூர்பாக்|mysore pak|maisoorpaak|h
+குலாப் ஜாமூன்|gulab jamun|gulaap jaamoon|m
+அவல்|flattened rice/poha|aval|h
+தயிர் சாதம்|curd rice|thayir saatham|m
+எலுமிச்சை சாதம்|lemon rice|elumichai saatham|m
+கூழ்|koozh/porridge|koozh|h
+பருப்பு|dal/lentils|paruppu|m
+ஆம்லெட்|omelette|aamlet|e
+சாண்ட்விச்|sandwich|saandvich|m
+டோனட்|donut|donat|m
+பஞ்சு மிட்டாய்|cotton candy|panju mittaai|m
+குச்சி ஐஸ்|ice candy/popsicle|kuchchi ais|m
+பிரெஞ்சு பிரைஸ்|french fries|frenchu fries|m
+# household|Household things|வீட்டுப் பொருட்கள்
+வீடு|house|veedu|e
+கதவு|door|kathavu|e
+ஜன்னல்|window|jannal|e
+நாற்காலி|chair|naarkaali|e
+மேசை|table|mesai|e
+கட்டில்|bed/cot|kattil|e
+தலையணை|pillow|thalaiyanai|e
+போர்வை|blanket|porvai|m
+பாய்|mat|paai|m
+மின்விசிறி|fan|minvisiri|e
+விளக்கு|lamp|vilakku|e
+மின்விளக்கு|light bulb/bulb|minvilakku|m
+கடிகாரம்|clock|kadigaaram|e
+கண்ணாடி|mirror|kannaadi|e
+சீப்பு|comb|seeppu|e
+பல் துலக்கி|toothbrush|pal thulakki|m
+பற்பசை|toothpaste|parpasai|m
+சோப்பு|soap|soappu|e
+துண்டு|towel|thundu|m
+வாளி|bucket|vaali|e
+குவளை|mug|kuvalai|m
+துடைப்பம்|broom|thudaippam|m
+குப்பைத்தொட்டி|dustbin|kuppaiththotti|m
+சாவி|key|saavi|e
+பூட்டு|lock|poottu|e
+தொலைக்காட்சி|television/tv|tholaikkaatchi|m
+ரிமோட்|remote|rimot|m
+குளிர்சாதனப் பெட்டி|refrigerator/fridge|kulirsaathanap petti|h
+சலவை இயந்திரம்|washing machine|salavai iyanthiram|h
+அலமாரி|cupboard/wardrobe|alamaari|m
+சோபா|sofa|sobaa|e
+ஏணி|ladder|eni|m
+குடை|umbrella|kudai|e
+மெழுகுவர்த்தி|candle|mezhuguvarththi|m
+தீப்பெட்டி|matchbox|theeppetti|m
+இஸ்திரிப் பெட்டி|iron box|isthirip petti|h
+தொட்டில்|cradle|thottil|m
+ஊஞ்சல்|swing|oonjal|e
+படிக்கட்டு|stairs|padikkattu|m
+சுவர்|wall|suvar|m
+கூரை|roof|koorai|m
+குழாய்|tap/pipe|kuzhaai|m
+ஷவர்|shower|shavar|m
+கழிவறை|toilet|kazhivarai|m
+செருப்பு|slippers/sandals|seruppu|e
+காலணி|shoe/shoes|kaalani|m
+புகைப்படம்|photo|pugaippadam|m
+திரைச்சீலை|curtain|thiraicheelai|h
+பூந்தொட்டி|flower pot|poonthotti|m
+மெத்தை|mattress|meththai|m
+அழைப்பு மணி|doorbell|azhaippu mani|h
+கூடை|basket|koodai|m
+பெட்டி|box|petti|e
+பை|bag|pai|e
+பணப்பை|purse/wallet|panappai|m
+கொசுவலை|mosquito net|kosuvalai|h
+கயிறு|rope|kayiru|m
+ஆணி|nail|aani|m
+சுத்தியல்|hammer|suththiyal|m
+திருகாணி|screw|thirugaani|h
+ரம்பம்|saw|rambam|h
+கோடரி|axe|kodari|m
+மண்வெட்டி|spade/shovel|manvetti|m
+கத்தரிக்கோல்|scissors|kaththarikkol|m
+ஊசி|needle|oosi|m
+நூல்|thread|nool|m
+பொத்தான்|button|poththaan|m
+டார்ச்|torch/flashlight|taarch|m
+பேட்டரி|battery|bettari|m
+ஏசி|air conditioner/ac|esi|m
+தண்ணீர் தொட்டி|water tank|thanneer thotti|m
+அஞ்சறைப் பெட்டி|spice box|anjaraip petti|h
+# kitchen|Kitchen|சமையலறை
+அடுப்பு|stove|aduppu|m
+பாத்திரம்|vessel|paaththiram|m
+தட்டு|plate|thattu|e
+டம்ளர்|tumbler/glass|tamlar|e
+கரண்டி|spoon/ladle|karandi|e
+முள்கரண்டி|fork|mulkarandi|m
+கத்தி|knife|kaththi|e
+குக்கர்|pressure cooker/cooker|kukkar|m
+தோசைக்கல்|dosa pan/tawa|thosaikkal|h
+அம்மிக்கல்|grinding stone|ammikkal|h
+ஆட்டுக்கல்|wet grinding stone|aattukkal|h
+உரல்|mortar|ural|h
+உலக்கை|pestle|ulakkai|h
+மிக்ஸி|mixer/mixie|miksi|m
+ஜாடி|jar|jaadi|m
+பாட்டில்|bottle|paattil|e
+குடம்|water pot|kudam|m
+பானை|clay pot/pot|paanai|m
+கிண்ணம்|bowl|kinnam|m
+சல்லடை|sieve|salladai|h
+வாணலி|wok/kadai|vaanali|h
+அரிவாள்மனை|vegetable cutter|arivaalmanai|h
+பிளாஸ்க்|flask|plaask|m
+டிபன் பாக்ஸ்|tiffin box/lunch box|tiffin baaks|m
+தண்ணீர்|water|thanneer|e
+தேங்காய் துருவி|coconut scraper|thengaai thuruvi|h
+# nature|Nature & weather|இயற்கை
+சூரியன்|sun|sooriyan|e
+நிலா|moon|nilaa|e
+நட்சத்திரம்|star|natchaththiram|e
+மேகம்|cloud|megam|e
+மழை|rain|mazhai|e
+வானவில்|rainbow|vaanavil|e
+மின்னல்|lightning|minnal|m
+இடி|thunder|idi|m
+காற்று|wind|kaatru|m
+புயல்|storm/cyclone|puyal|m
+பனி|snow|pani|m
+மலை|mountain/hill|malai|e
+எரிமலை|volcano|erimalai|m
+கடல்|sea/ocean|kadal|e
+ஆறு|river|aaru|e
+ஏரி|lake|eri|m
+குளம்|pond|kulam|m
+அருவி|waterfall|aruvi|m
+தீவு|island|theevu|m
+பாலைவனம்|desert|paalaivanam|m
+காடு|forest/jungle|kaadu|e
+மரம்|tree|maram|e
+பூ|flower|poo|e
+இலை|leaf|ilai|e
+வேர்|root|ver|m
+கிளை|branch|kilai|m
+புல்|grass|pul|e
+விதை|seed|vithai|m
+தென்னை மரம்|coconut tree|thennai maram|m
+பனை மரம்|palm tree|panai maram|m
+ஆலமரம்|banyan tree|aalamaram|m
+வேப்பமரம்|neem tree|veppamaram|h
+தாமரை|lotus|thaamarai|e
+ரோஜா|rose|rojaa|e
+மல்லிகைப்பூ|jasmine|malligaippoo|m
+சூரியகாந்தி|sunflower|sooriyagaanthi|m
+சாமந்திப்பூ|chrysanthemum/marigold|saamanthippoo|h
+கள்ளிச்செடி|cactus|kallichchedi|m
+மூங்கில்|bamboo|moongil|m
+கல்|stone|kal|e
+மணல்|sand|manal|m
+மண்|soil/mud|man|m
+நெருப்பு|fire|neruppu|e
+புகை|smoke|pugai|m
+அலை|wave|alai|m
+கடற்கரை|beach|kadarkarai|e
+குகை|cave|kugai|m
+பாறை|rock|paarai|m
+வயல்|paddy field/field|vayal|m
+நெல்|paddy|nel|h
+கிணறு|well|kinaru|m
+பனிக்கட்டி|ice|panikkatti|m
+பனிமனிதன்|snowman|panimanithan|m
+சூரிய உதயம்|sunrise|sooriya uthayam|m
+சூரிய அஸ்தமனம்|sunset|sooriya asthamanam|h
+பள்ளத்தாக்கு|valley|pallaththaakku|h
+நிலநடுக்கம்|earthquake|nilanadukkam|h
+வெள்ளம்|flood|vellam|m
+மலர்க்கொத்து|bouquet|malarkkoththu|m
+புல்வெளி|meadow/lawn|pulveli|h
+சூறாவளி|tornado/whirlwind|sooraavali|h
+# body|Body parts|உடல் உறுப்புகள்
+தலை|head|thalai|e
+முடி|hair|mudi|e
+கண்|eye|kan|e
+காது|ear|kaathu|e
+மூக்கு|nose|mookku|e
+வாய்|mouth|vaai|e
+உதடு|lips|uthadu|m
+பல்|tooth/teeth|pal|e
+நாக்கு|tongue|naakku|e
+கழுத்து|neck|kazhuththu|m
+தோள்|shoulder|thol|m
+கை|hand|kai|e
+விரல்|finger|viral|e
+நகம்|fingernail|nagam|m
+கால்|leg|kaal|e
+பாதம்|foot|paatham|m
+முழங்கால்|knee|muzhangaal|m
+முழங்கை|elbow|muzhangai|m
+வயிறு|stomach|vayiru|m
+முதுகு|back|muthugu|m
+இதயம்|heart|ithayam|e
+மூளை|brain|moolai|m
+எலும்பு|bone|elumbu|m
+மீசை|moustache/mustache|meesai|e
+தாடி|beard|thaadi|e
+புருவம்|eyebrow|puruvam|m
+கன்னம்|cheek|kannam|m
+முகம்|face|mugam|e
+கட்டைவிரல்|thumb|kattaiviral|m
+நுரையீரல்|lungs|nuraiyeeral|h
+எலும்புக்கூடு|skeleton|elumbukkoodu|m
+கைரேகை|fingerprint|kairegai|h
+இமை|eyelid/eyelash|imai|h
+தொப்புள்|navel/belly button|thoppul|h
+புன்னகை|smile|punnagai|e
+கண்ணீர்|tears|kanneer|m
+பின்னல்|braid/plait|pinnal|h
+# vehicles|Vehicles & transport|வாகனங்கள்
+கார்|car|kaar|e
+பேருந்து|bus|perunthu|e
+மிதிவண்டி|bicycle/cycle|mithivandi|e
+மோட்டார் சைக்கிள்|motorcycle/bike|mottaar saikkil|e
+ஸ்கூட்டர்|scooter|skoottar|e
+ஆட்டோ|auto rickshaw/auto|aatto|e
+ரயில்|train|rayil|e
+விமானம்|aeroplane/airplane/plane|vimaanam|e
+ஹெலிகாப்டர்|helicopter|helikaaptar|e
+கப்பல்|ship|kappal|e
+படகு|boat|padagu|e
+லாரி|lorry/truck|laari|e
+மாட்டு வண்டி|bullock cart|maattu vandi|m
+டிராக்டர்|tractor|traaktar|m
+ஆம்புலன்ஸ்|ambulance|aambulans|m
+தீயணைப்பு வண்டி|fire engine/fire truck|theeyanaippu vandi|h
+ராக்கெட்|rocket|raakket|e
+நீர்மூழ்கிக் கப்பல்|submarine|neermoozhgik kappal|h
+ஜீப்|jeep|jeep|m
+வேன்|van|ven|m
+டாக்ஸி|taxi|taaksi|m
+மெட்ரோ ரயில்|metro train|metro rayil|m
+ஜேசிபி|jcb/excavator|jesibi|m
+தள்ளுவண்டி|pushcart/trolley|thalluvandi|h
+கட்டுமரம்|catamaran|kattumaram|h
+பாய்மரக் கப்பல்|sailboat|paaimarak kappal|h
+சக்கரம்|wheel|chakkaram|m
+டயர்|tyre/tire|tayar|m
+போக்குவரத்து விளக்கு|traffic light|pokkuvaraththu vilakku|h
+ஹெல்மெட்|helmet|helmet|e
+பறக்கும் தட்டு|ufo/flying saucer|parakkum thattu|h
+ஸ்கேட்போர்டு|skateboard|sketbordu|m
+வெப்பக்காற்று பலூன்|hot air balloon|veppakkaatru baloon|h
+பெட்ரோல் பங்க்|petrol bunk/petrol pump|petrol bank|h
+# places|Places & buildings|இடங்கள்
+பள்ளி|school|palli|e
+கோவில்|temple|kovil|e
+மருத்துவமனை|hospital|maruththuvamanai|m
+வங்கி|bank|vangi|m
+பூங்கா|park|poongaa|e
+சந்தை|market|santhai|m
+கடை|shop|kadai|e
+உணவகம்|restaurant/hotel|unavagam|m
+விமான நிலையம்|airport|vimaana nilaiyam|m
+ரயில் நிலையம்|railway station|rayil nilaiyam|m
+பேருந்து நிலையம்|bus stand/bus station|perunthu nilaiyam|m
+நூலகம்|library|noolagam|m
+திரையரங்கம்|cinema theatre/theatre|thiraiyarangam|m
+அஞ்சல் அலுவலகம்|post office|anjal aluvalagam|h
+காவல் நிலையம்|police station|kaaval nilaiyam|h
+பாலம்|bridge|paalam|e
+கோட்டை|fort|kottai|m
+அரண்மனை|palace|aranmanai|m
+கலங்கரை விளக்கம்|lighthouse|kalangarai vilakkam|h
+தேவாலயம்|church|thevaalayam|m
+மசூதி|mosque|masoothi|m
+கோபுரம்|temple tower/tower|kopuram|m
+மிருகக்காட்சிசாலை|zoo|mirugakkaatchisaalai|h
+அருங்காட்சியகம்|museum|arungaatchiyagam|h
+பண்ணை|farm|pannai|m
+கிராமம்|village|kiraamam|m
+நகரம்|city|nagaram|m
+சாலை|road|saalai|e
+தெரு|street|theru|m
+கூடாரம்|tent|koodaaram|m
+குடிசை|hut|kudisai|m
+தோட்டம்|garden|thottam|e
+நீச்சல் குளம்|swimming pool|neechchal kulam|m
+விளையாட்டு மைதானம்|playground/stadium|vilaiyaattu maithaanam|m
+சர்க்கஸ்|circus|sarkkas|m
+தொழிற்சாலை|factory|thozhirsaalai|h
+மருந்தகம்|pharmacy/medical shop|marunthagam|h
+சிறை|jail/prison|sirai|m
+பிரமிடு|pyramid|piramidu|m
+தாஜ்மஹால்|taj mahal|taajmahaal|m
+ஈபிள் கோபுரம்|eiffel tower|eebil kopuram|m
+சுரங்கப்பாதை|tunnel/subway|surangappaathai|h
+மெரினா கடற்கரை|marina beach|marinaa kadarkarai|h
+வானளாவிய கட்டடம்|skyscraper|vaanalaaviya kattadam|h
+ராட்டினம்|giant wheel/ferris wheel|raattinam|m
+# actions|Actions & feelings|செயல்கள்
+ஓடுதல்|running/run|oduthal|e
+நடத்தல்|walking/walk|nadaththal|e
+குதித்தல்|jumping/jump|kuthiththal|e
+நீந்துதல்|swimming/swim|neenthuthal|e
+தூங்குதல்|sleeping/sleep|thoonguthal|e
+சாப்பிடுதல்|eating/eat|saappiduthal|e
+குடித்தல்|drinking/drink|kudiththal|e
+சிரித்தல்|laughing/laugh|siriththal|e
+அழுதல்|crying/cry|azhuthal|e
+பாடுதல்|singing/sing|paaduthal|e
+ஆடுதல்|dancing/dance|aaduthal|e
+எழுதுதல்|writing/write|ezhuthuthal|e
+படித்தல்|reading/read|padiththal|e
+சமைத்தல்|cooking|samaiththal|m
+வரைதல்|drawing/draw|varaithal|m
+பறத்தல்|flying/fly|paraththal|m
+மீன் பிடித்தல்|fishing|meen pidiththal|m
+தும்முதல்|sneezing/sneeze|thummuthal|h
+கொட்டாவி|yawn|kottaavi|h
+கைதட்டுதல்|clapping/clap|kaithattuthal|m
+குளித்தல்|bathing/bath|kuliththal|m
+துவைத்தல்|washing clothes|thuvaiththal|h
+வணக்கம்|namaste/vanakkam|vanakkam|e
+கை குலுக்குதல்|handshake|kai kulukkuthal|h
+தள்ளுதல்|pushing/push|thalluthal|h
+இழுத்தல்|pulling/pull|izhuththal|h
+எறிதல்|throwing/throw|erithal|m
+பிடித்தல்|catching/catch|pidiththal|m
+உதைத்தல்|kicking/kick|uthaiththal|m
+ஏறுதல்|climbing/climb|eruthal|m
+வெட்டுதல்|cutting/cut|vettuthal|m
+தோண்டுதல்|digging/dig|thonduthal|h
+பேசுதல்|talking/talk|pesuthal|m
+யோசித்தல்|thinking/think|yosiththal|h
+கனவு|dream|kanavu|m
+முத்தம்|kiss|muththam|m
+கட்டிப்பிடித்தல்|hug|kattippidiththal|m
+செல்ஃபி|selfie|selfie|e
+யோகா|yoga|yogaa|e
+தியானம்|meditation|thiyaanam|m
+பெருக்குதல்|sweeping/sweep|perukkuthal|h
+விசில் அடித்தல்|whistling|visil adiththal|h
+தையல்|sewing/stitching|thaiyal|h
+கோபம்|anger/angry|kobam|m
+பயம்|fear/scared|bayam|m
+வெட்கம்|shy/shyness|vetkam|h
+ஆச்சரியம்|surprise|aachchariyam|m
+குறட்டை|snoring/snore|kurattai|h
+விக்கல்|hiccup|vikkal|h
+சண்டை|fight|sandai|m
+ஷாப்பிங்|shopping|shaapping|m
+# culture|Festivals & Tamil culture|பண்டிகைகள் & பண்பாடு
+பொங்கல்|pongal|pongal|e
+கோலம்|kolam/rangoli|kolam|e
+ஜல்லிக்கட்டு|jallikattu|jallikkattu|m
+தீபாவளி|diwali/deepavali|theepaavali|e
+பட்டாசு|firecracker/crackers|pattaasu|e
+மத்தாப்பு|sparkler|maththaappu|m
+தீபம்|diya|theepam|m
+அகல் விளக்கு|clay lamp|agal vilakku|h
+குத்துவிளக்கு|kuthuvilakku/brass lamp|kuththuvilakku|h
+கார்த்திகை தீபம்|karthigai deepam|kaarththigai theepam|h
+ஆயுத பூஜை|ayudha pooja|aayutha poojai|m
+சரஸ்வதி பூஜை|saraswathi pooja|sarasvathi poojai|h
+கொலு|golu/kolu|kolu|m
+விநாயகர் சதுர்த்தி|vinayagar chathurthi/ganesh chaturthi|vinaayagar sathurththi|h
+பிள்ளையார்|pillaiyar/ganesha|pillaiyaar|m
+கிறிஸ்துமஸ் மரம்|christmas tree|kiristhumas maram|m
+கிறிஸ்துமஸ் தாத்தா|santa claus|kiristhumas thaaththaa|m
+ரம்ஜான்|ramzan|ramjaan|h
+பிறந்தநாள்|birthday|piranthanaal|e
+திருமணம்|wedding/marriage|thirumanam|m
+தாலி|thali/mangalsutra|thaali|h
+மாலை|garland|maalai|m
+தோரணம்|thoranam/festoon|thoranam|h
+வாழை இலை|banana leaf|vaazhai ilai|m
+பரதநாட்டியம்|bharatanatyam|bharathanaattiyam|h
+கரகாட்டம்|karagattam|karagaattam|h
+மயிலாட்டம்|mayilattam/peacock dance|mayilaattam|h
+பொய்க்கால் குதிரை|poikkal kuthirai/dummy horse dance|poikkaal kuthirai|h
+சிலம்பம்|silambam|silambam|h
+கும்மி|kummi|kummi|h
+பல்லாங்குழி|pallanguzhi|pallaanguzhi|h
+பம்பரம்|spinning top/top|pambaram|m
+கோலி|marbles|goli|m
+கில்லி|gilli danda|gilli|h
+பட்டம்|kite|pattam|e
+தேர்|temple chariot/chariot|ther|m
+உறியடி|uriyadi/pot breaking|uriyadi|h
+மருதாணி|henna/mehndi|maruthaani|m
+குங்குமம்|kumkum|kungumam|m
+விபூதி|vibhuti/holy ash|vibhoothi|m
+சந்தனம்|sandalwood paste/sandal|santhanam|h
+தேங்காய் உடைத்தல்|coconut breaking|thengaai udaiththal|h
+பூஜை மணி|pooja bell|poojai mani|m
+கற்பூரம்|camphor|karpooram|h
+ஊதுபத்தி|incense stick/agarbatti|oothupaththi|m
+திருவள்ளுவர்|thiruvalluvar|thiruvalluvar|h
+போகி|bhogi|bogi|h
+மாட்டுப் பொங்கல்|mattu pongal|maattup pongal|h
+நவராத்திரி|navaratri|navaraaththiri|h
+ஹோலி|holi|holi|m
+பரிசு|gift|parisu|e
+தாம்பூலம்|thamboolam/betel tray|thaamboolam|h
+வெற்றிலை|betel leaf|vetrilai|h
+மேளம்|melam/drum|melam|m
+தலை வாழை இலை விருந்து|banana leaf feast|thalai vaazhai ilai virunthu|h
+# professions|People & professions|மனிதர்கள் & தொழில்கள்
+மருத்துவர்|doctor|maruththuvar|e
+செவிலியர்|nurse|seviliyar|m
+ஆசிரியர்|teacher|aasiriyar|e
+காவலர்|police/policeman|kaavalar|m
+விவசாயி|farmer|vivasaayi|e
+மீனவர்|fisherman|meenavar|m
+சமையல்காரர்|cook/chef|samaiyalkaarar|m
+ஓட்டுநர்|driver|ottunar|m
+விமானி|pilot|vimaani|m
+ராணுவ வீரர்|soldier|raanuva veerar|m
+தீயணைப்பு வீரர்|firefighter/fireman|theeyanaippu veerar|h
+தபால்காரர்|postman|thabaalkaarar|m
+தச்சர்|carpenter|thachchar|h
+கொத்தனார்|mason|koththanaar|h
+தையல்காரர்|tailor|thaiyalkaarar|m
+முடிதிருத்துபவர்|barber|mudithiruththubavar|h
+குயவர்|potter|kuyavar|h
+கொல்லர்|blacksmith|kollar|h
+பொற்கொல்லர்|goldsmith|porkollar|h
+பாடகர்|singer|paadagar|m
+நடிகர்|actor|nadigar|m
+ஓவியர்|painter/artist|oviyar|m
+விஞ்ஞானி|scientist|vinjnaani|m
+பொறியாளர்|engineer|poriyaalar|m
+வழக்கறிஞர்|lawyer|vazhakkarinjar|h
+நீதிபதி|judge|neethipathi|h
+விண்வெளி வீரர்|astronaut|vinveli veerar|m
+மந்திரவாதி|magician|manthiravaathi|m
+கோமாளி|clown/joker|komaali|m
+அர்ச்சகர்|priest|archchagar|h
+பால்காரர்|milkman|paalkaarar|m
+காய்கறி வியாபாரி|vegetable vendor|kaaikari viyaapaari|h
+புகைப்படக் கலைஞர்|photographer|pugaippadak kalainjar|h
+கடற்கொள்ளையர்|pirate|kadarkollaiyar|h
+ராஜா|king|raajaa|e
+ராணி|queen|raani|e
+இளவரசி|princess|ilavarasi|m
+பேய்|ghost|pei|m
+தேவதை|angel/fairy|thevathai|m
+ரோபோ|robot|robo|e
+சூப்பர்மேன்|superman|sooppermen|m
+பாட்டி|grandmother/grandma|paatti|m
+தாத்தா|grandfather/grandpa|thaaththaa|m
+குழந்தை|baby|kuzhanthai|e
+மாணவர்|student|maanavar|m
+பாம்பாட்டி|snake charmer|paambaatti|h
+காவலாளி|watchman/guard|kaavalaali|h
+அம்மா|mother/amma|ammaa|e
+அப்பா|father/appa|appaa|e
+அண்ணன்|elder brother/anna|annan|m
+# objects|Objects & things|பொருட்கள்
+புத்தகம்|book|puththagam|e
+பேனா|pen|penaa|e
+பென்சில்|pencil|pensil|e
+அழிப்பான்|eraser|azhippaan|m
+அளவுகோல்|ruler/scale|alavukol|m
+காகிதம்|paper|kaagitham|e
+கரும்பலகை|blackboard|karumbalagai|m
+சாக்பீஸ்|chalk|chaakpees|m
+பள்ளிப் பை|school bag|pallip pai|m
+மேசை விளக்கு|table lamp|mesai vilakku|m
+கடிதம்|letter|kaditham|m
+உறை|envelope|urai|h
+அஞ்சல் தலை|postage stamp/stamp|anjal thalai|h
+வரைபடம்|map|varaipadam|m
+உலக உருண்டை|globe|ulaga urundai|m
+திசைகாட்டி|compass|thisaikaatti|h
+தொலைநோக்கி|telescope|tholainokki|h
+பூதக்கண்ணாடி|magnifying glass|boothakkannaadi|h
+மூக்குக்கண்ணாடி|spectacles/glasses|mookkukkannaadi|m
+குளிர் கண்ணாடி|sunglasses|kulir kannaadi|m
+மணிக்கடிகாரம்|wristwatch/watch|manikkadigaaram|m
+மோதிரம்|ring|mothiram|e
+வளையல்|bangle|valaiyal|m
+கம்மல்|earring|kammal|m
+கொலுசு|anklet|kolusu|m
+நெக்லஸ்|necklace|neklas|m
+கிரீடம்|crown|kireedam|m
+நாணயம்|coin|naanayam|m
+ரூபாய் நோட்டு|currency note/money|roobaai nottu|m
+உண்டியல்|piggy bank/money box|undiyal|h
+மணி|bell|mani|e
+கொடி|flag|kodi|e
+பலூன்|balloon|baloon|e
+பொம்மை|doll/toy|bommai|e
+டெட்டி பியர்|teddy bear|tetti piyar|m
+பந்து|ball|panthu|e
+வாள்|sword|vaal|m
+வில்|bow|vil|m
+அம்பு|arrow|ambu|m
+கேடயம்|shield|kedayam|h
+பீரங்கி|cannon|peerangi|h
+காந்தம்|magnet|kaantham|m
+சிலை|statue|silai|m
+நங்கூரம்|anchor|nangooram|h
+புதையல்|treasure|puthaiyal|h
+பரிசுக் கோப்பை|trophy/cup|parisuk koppai|m
+பதக்கம்|medal|pathakkam|m
+சங்கிலி|chain|sangili|m
+சக்கர நாற்காலி|wheelchair|chakkara naarkaali|h
+ஊன்றுகோல்|walking stick|oonrukol|h
+முகமூடி|mask|mugamoodi|m
+விசில்|whistle|visil|m
+மணல் கடிகாரம்|hourglass|manal kadigaaram|h
+கை விசிறி|hand fan|kai visiri|m
+மாத்திரை|tablet/pill|maaththirai|m
+தெர்மாமீட்டர்|thermometer|thermaameettar|h
+ஸ்டெதஸ்கோப்|stethoscope|stethaskop|h
+ஸ்டேப்லர்|stapler|steplar|m
+பசை|glue|pasai|m
+கிரேயான்|crayon|kireyaan|m
+வண்ணத்தூரிகை|paintbrush|vannaththoorigai|h
+காகிதக் கப்பல்|paper boat|kaagithak kappal|m
+காகித விமானம்|paper plane|kaagitha vimaanam|m
+காற்றாடி|pinwheel/windmill|kaatraadi|m
+குமிழி|bubble|kumizhi|m
+முடிச்சு|knot|mudichchu|h
+நிழல்|shadow|nizhal|m
+# sports|Sports & games|விளையாட்டுகள்
+கிரிக்கெட்|cricket|kirikket|e
+கால்பந்து|football/soccer|kaalpanthu|e
+கூடைப்பந்து|basketball|koodaippanthu|m
+கைப்பந்து|volleyball|kaippanthu|m
+டென்னிஸ்|tennis|tennis|m
+இறகுப்பந்து|badminton|iraguppanthu|m
+கபடி|kabaddi|kabadi|e
+சதுரங்கம்|chess|sathurangam|m
+கேரம்|carrom|keram|m
+ஹாக்கி|hockey|haakki|m
+கோல்ஃப்|golf|golf|m
+குத்துச்சண்டை|boxing|kuththuchchandai|m
+மல்யுத்தம்|wrestling|malyuththam|h
+ஓட்டப்பந்தயம்|race|ottappanthayam|m
+கிரிக்கெட் மட்டை|cricket bat|kirikket mattai|m
+ஸ்டம்ப்|stumps/wicket|stamp|h
+டேபிள் டென்னிஸ்|table tennis|tebil tennis|m
+வில்வித்தை|archery|vilviththai|h
+ஸ்கேட்டிங்|skating|sketting|m
+ஸ்கிப்பிங்|skipping rope|skipping|m
+கண்ணாமூச்சி|hide and seek|kannaamoochchi|m
+தாயம்|thayam/dice game|thaayam|h
+பகடை|dice|pagadai|m
+சீட்டுக்கட்டு|playing cards|seettukkattu|m
+பரமபதம்|snakes and ladders|paramapatham|h
+கயிறு இழுத்தல்|tug of war|kayiru izhuththal|h
+நீளம் தாண்டுதல்|long jump|neelam thaanduthal|h
+உயரம் தாண்டுதல்|high jump|uyaram thaanduthal|h
+சறுக்கு மரம்|slide|sarukku maram|m
+சீசா|seesaw|seesaa|m
+ஒலிம்பிக்|olympics|olimpik|m
+கோல் போஸ்ட்|goal post|gol post|m
+புதிர்|puzzle|puthir|m
+வீடியோ கேம்|video game|veediyo kem|m
+ஜிம்|gym|jim|m
+பளுதூக்குதல்|weightlifting|paluthookkuthal|h
+நீச்சல்|swimming race|neechchal|m
+# clothing|Clothes & accessories|உடைகள்
+சட்டை|shirt|sattai|e
+கால்சட்டை|pants/trousers|kaalsattai|m
+புடவை|saree/sari|pudavai|e
+வேட்டி|veshti/dhoti|vetti|m
+லுங்கி|lungi|lungi|m
+பாவாடை|skirt/pavadai|paavaadai|m
+தாவணி|half saree/dhavani|thaavani|h
+சுடிதார்|churidar|sudithaar|m
+தொப்பி|cap/hat|thoppi|e
+கையுறை|gloves|kaiyurai|m
+காலுறை|socks|kaalurai|m
+கழுத்துப்பட்டை|tie/necktie|kazhuththuppattai|h
+பெல்ட்|belt|belt|m
+ஸ்வெட்டர்|sweater|svettar|m
+மழைக்கோட்டு|raincoat|mazhaikkottu|m
+ஜீன்ஸ்|jeans|jeens|m
+தலைப்பாகை|turban|thalaippaagai|h
+கைக்குட்டை|handkerchief|kaikkuttai|m
+துப்பட்டா|dupatta|thuppattaa|h
+பூட்ஸ்|boots|boots|m
+மப்ளர்|muffler/scarf|maplar|m
+பொட்டு|bindi/pottu|pottu|m
+கொண்டை|hair bun|kondai|h
+சீருடை|uniform|seerudai|m
+# music|Music & instruments|இசைக்கருவிகள்
+வீணை|veena|veenai|m
+மிருதங்கம்|mridangam|miruthangam|h
+புல்லாங்குழல்|flute|pullaanguzhal|m
+தபேலா|tabla|thabelaa|m
+கிட்டார்|guitar|kittaar|e
+பியானோ|piano|piyaano|e
+வயலின்|violin|vayalin|m
+டிரம்ஸ்|drums|drams|m
+தவில்|thavil|thavil|h
+பறை|parai drum|parai|h
+உடுக்கை|udukkai|udukkai|h
+ஹார்மோனியம்|harmonium|haarmoniyam|h
+சாக்ஸபோன்|saxophone|saaksapon|h
+டிரம்பெட்|trumpet|trampet|h
+ஒலிபெருக்கி|loudspeaker|oliperukki|m
+மைக்|microphone/mic|maik|m
+ஹெட்போன்|headphones|hedpon|m
+நாதஸ்வரம்|nadaswaram|naathasvaram|h
+# space|Shapes, space & symbols|வடிவங்கள் & விண்வெளி
+வட்டம்|circle|vattam|e
+சதுரம்|square|sathuram|e
+முக்கோணம்|triangle|mukkonam|e
+செவ்வகம்|rectangle|sevvagam|m
+பூமி|earth|boomi|e
+செவ்வாய் கிரகம்|mars|sevvaai kiragam|h
+சனி கிரகம்|saturn|sani kiragam|h
+வால் நட்சத்திரம்|comet|vaal natchaththiram|h
+விண்கலம்|spaceship/spacecraft|vinkalam|m
+செயற்கைக்கோள்|satellite|seyarkaikkol|h
+வேற்றுகிரகவாசி|alien|vetrukiragavaasi|h
+கிரகணம்|eclipse|kiraganam|h
+பிறை நிலா|crescent moon|pirai nilaa|m
+முழு நிலவு|full moon|muzhu nilavu|m
+கேள்விக்குறி|question mark|kelvikkuri|m
+ஆச்சரியக்குறி|exclamation mark|aachchariyakkuri|h
+கூட்டல் குறி|plus sign/plus|koottal kuri|m
+# tech|Technology|தொழில்நுட்பம்
+கைப்பேசி|mobile phone/phone|kaippesi|e
+கணினி|computer|kanini|e
+மடிக்கணினி|laptop|madikkanini|m
+விசைப்பலகை|keyboard|visaippalagai|m
+சுட்டி|mouse/computer mouse|sutti|h
+கேமரா|camera|kemaraa|e
+தொலைபேசி|telephone|tholaipesi|m
+வானொலி|radio|vaanoli|m
+ட்ரோன்|drone|dron|m
+சார்ஜர்|charger|chaarjar|m
+பென் டிரைவ்|pen drive|pen draiv|h
+அச்சுப்பொறி|printer|achchuppori|h
+மின்னஞ்சல்|email|minnanjal|h
+வைஃபை|wifi|vaifai|m
+ஸ்மார்ட் வாட்ச்|smart watch|smaart vaatch|h
+மின்சாரம்|electricity|minsaaram|h
+சூரிய மின்தகடு|solar panel|sooriya minthagadu|h
+ஏடிஎம்|atm|etiem|m
+கால்குலேட்டர்|calculator|kaalkulettar|m
+மின் கம்பம்|electric pole|min kambam|h
