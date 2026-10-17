@@ -6,13 +6,20 @@ const express = require('express');
 const { Server } = require('socket.io');
 const { graphemes, checkGuess, norm } = require('./lib/text');
 const WORDDB = require('./data/words.json');
+const WORDS_EN = require('./data/words-en.json');
+// Internally every word uses `ta` as "the word to guess" plus a `lang` tag ('ta' | 'en' | 'custom').
+const TA_WORDS = WORDDB.words.map(w => ({ ...w, lang: 'ta' }));
+const EN_WORDS = WORDS_EN.words.map(w => ({ ta: w.word, en: '', translit: '', category: w.category, difficulty: w.difficulty, lang: 'en' }));
 
 const PORT = process.env.PORT || 3000;
 const app = express();
 app.disable('x-powered-by');
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: '1h', setHeaders(res, p) { if (p.endsWith('.html')) res.setHeader('Cache-Control', 'no-cache'); } }));
-app.get('/healthz', (req, res) => res.json({ ok: true, rooms: rooms.size, words: WORDDB.words.length }));
-app.get('/api/meta', (req, res) => res.json({ categories: WORDDB.categories, words: WORDDB.words.length }));
+app.get('/healthz', (req, res) => res.json({ ok: true, rooms: rooms.size, words: WORDDB.words.length, wordsEn: EN_WORDS.length }));
+app.get('/api/meta', (req, res) => res.json({
+  categories: WORDDB.categories.map(c => ({ ...c, ta_count: TA_WORDS.filter(w => w.category === c.key).length, en_count: EN_WORDS.filter(w => w.category === c.key).length })),
+  words: WORDDB.words.length, wordsEn: EN_WORDS.length,
+}));
 
 const server = http.createServer(app);
 const io = new Server(server, { cors: { origin: '*' }, maxHttpBufferSize: 1e6, pingInterval: 10000, pingTimeout: 20000 });
@@ -24,11 +31,13 @@ const TURN_END_TIME = +process.env.TURN_END_MS || 6000;
 const RECONNECT_GRACE = 45000;
 const DEFAULTS = {
   maxPlayers: 8, rounds: 3, drawTime: 80, wordCount: 3, hints: 2,
-  wordMode: 'normal', customWords: '', customOnly: false, acceptEnglish: true, difficulty: 'all', voiceGuess: true,
+  wordMode: 'normal', customWords: '', customOnly: false, acceptEnglish: true, difficulty: 'all', voiceGuess: true, wordLang: 'ta', category: 'all',
 };
 const LIMITS = { maxPlayers: [2, 12], rounds: [2, 10], drawTime: [30, 240], wordCount: [1, 5], hints: [0, 5] };
 const WORD_MODES = ['normal', 'hidden', 'both'];
 const DIFFS = ['all', 'easy', 'medium', 'hard'];
+const WORD_LANGS = ['ta', 'en', 'mixed'];
+const CATEGORY_KEYS = ['all', ...WORDDB.categories.map(c => c.key)];
 const COLOR_RE = /^#[0-9a-fA-F]{6}$/;
 
 const rooms = new Map();
@@ -56,7 +65,7 @@ function parseCustomWords(text) {
     const m = s.split(/[:=]/);
     const ta = m[0].normalize('NFC').trim().slice(0, 40);
     const en = (m[1] || '').trim().slice(0, 40);
-    return { ta, en, translit: '', category: 'custom', difficulty: 'custom', custom: true };
+    return { ta, en, translit: '', category: 'custom', difficulty: 'custom', custom: true, lang: 'custom' };
   }).filter(w => w.ta);
 }
 
@@ -75,30 +84,44 @@ function newRoom(hostPid) {
   return room;
 }
 
+function filtered(list, s) {
+  let out = list;
+  if (s.difficulty !== 'all') out = out.filter(w => w.difficulty === s.difficulty);
+  if (s.category !== 'all') { const c = out.filter(w => w.category === s.category); out = c.length ? c : out; }
+  return out.length ? out : list;
+}
 function wordPool(room) {
   const s = room.settings;
   const custom = parseCustomWords(s.customWords);
-  let db = WORDDB.words;
-  if (s.difficulty !== 'all') db = db.filter(w => w.difficulty === s.difficulty);
-  return { custom, db: s.customOnly && custom.length >= s.wordCount ? [] : db };
+  const onlyCustom = s.customOnly && custom.length >= s.wordCount;
+  const ta = onlyCustom || s.wordLang === 'en' ? [] : filtered(TA_WORDS, s);
+  const en = onlyCustom || s.wordLang === 'ta' ? [] : filtered(EN_WORDS, s);
+  return { custom, ta, en };
 }
 function pickChoices(room) {
   const n = room.settings.wordCount;
-  const { custom, db } = wordPool(room);
+  const pool = wordPool(room);
   const avail = arr => arr.filter(w => !room.usedWords.has(w.ta));
-  let c = avail(custom), d = avail(db);
-  if (c.length + d.length < n) { room.usedWords.clear(); c = custom.slice(); d = db.slice(); }
-  shuffle(c); shuffle(d);
+  let lists = { custom: avail(pool.custom), ta: avail(pool.ta), en: avail(pool.en) };
+  const total = () => lists.custom.length + lists.ta.length + lists.en.length;
+  if (total() < n) { room.usedWords.clear(); lists = { custom: pool.custom.slice(), ta: pool.ta.slice(), en: pool.en.slice() }; }
+  Object.values(lists).forEach(shuffle);
+  // slot order: in mixed mode alternate Tamil/English (random start) so every offer has both
+  const langs = room.settings.wordLang === 'mixed' ? (Math.random() < 0.5 ? ['ta', 'en'] : ['en', 'ta']) : [room.settings.wordLang];
   const out = [];
-  while (out.length < n && (c.length || d.length)) {
-    const useCustom = c.length && (!d.length || Math.random() < 0.5);
-    const w = useCustom ? c.pop() : d.pop();
+  let i = 0, guard = 0;
+  while (out.length < n && total() > 0 && guard++ < 100) {
+    let src;
+    if (lists.custom.length && Math.random() < 0.5) src = 'custom';
+    else { src = langs[i++ % langs.length]; if (!lists[src].length) src = ['ta', 'en', 'custom'].find(k => lists[k].length); }
+    const w = lists[src].pop();
     if (!out.some(o => o.ta === w.ta)) out.push(w);
   }
   return out;
 }
 
 // ---------- state broadcasting ----------
+const isPunct = ch => /^[-'.]$/.test(ch);
 function hintFor(room, pid) {
   if (!room.word) return null;
   const isDrawer = pid === room.drawerId;
@@ -106,14 +129,14 @@ function hintFor(room, pid) {
   const g = graphemes(room.word.ta);
   const showAll = isDrawer || guessed || room.phase === 'turnEnd';
   if (room.settings.wordMode === 'hidden' && !showAll) return { hidden: true };
-  const ta = g.map((ch, i) => ch === ' ' ? { s: 1 } : (showAll || room.revealed.has(i)) ? { c: ch } : {});
-  const out = { ta, count: g.filter(x => x !== ' ').length };
+  const ta = g.map((ch, i) => ch === ' ' ? { s: 1 } : (showAll || room.revealed.has(i) || isPunct(ch)) ? { c: ch } : {});
+  const out = { ta, count: g.filter(x => x !== ' ' && !isPunct(x)).length };
   if (showAll) out.full = true;
   if (room.settings.wordMode === 'both' && room.word.en) {
     const en = room.word.en.split('/')[0];
     out.en = showAll ? en : en.replace(/[^ ]/g, '_');
   }
-  if (isDrawer) { out.meaning = room.word.en; out.translit = room.word.translit; }
+  if (isDrawer && room.word.lang !== 'en') { out.meaning = room.word.en; out.translit = room.word.translit; }
   return out;
 }
 
@@ -130,7 +153,7 @@ function baseState(room) {
     })),
     lastTurn: room.phase === 'turnEnd' ? room.lastTurn : null,
     podium: room.phase === 'gameEnd' ? room.podium : null,
-    wordCountTotal: WORDDB.words.length,
+    wordCountTotal: WORDDB.words.length, wordCountEn: EN_WORDS.length,
   };
 }
 function broadcastState(room) {
@@ -138,7 +161,7 @@ function broadcastState(room) {
   for (const p of room.players.values()) {
     if (!p.socketId) continue;
     const st = { ...base, you: p.id, hint: hintFor(room, p.id) };
-    if (room.phase === 'choosing' && p.id === room.drawerId) st.choices = room.choices.map(w => ({ ta: w.ta, en: w.en, translit: w.translit }));
+    if (room.phase === 'choosing' && p.id === room.drawerId) st.choices = room.choices.map(w => ({ ta: w.ta, en: w.en, translit: w.translit, lang: w.lang }));
     io.to(p.socketId).emit('state', st);
   }
 }
@@ -196,7 +219,7 @@ function chooseWord(room, idx) {
   room.endsAt = Date.now() + dt;
   // hints
   const g = graphemes(w.ta);
-  const letters = g.filter(x => x !== ' ').length;
+  const letters = g.filter(x => x !== ' ' && !isPunct(x)).length;
   const nh = room.settings.wordMode === 'hidden' ? 0 : Math.min(room.settings.hints, Math.max(0, letters - 1));
   room.hintTimes = [];
   for (let i = 1; i <= nh; i++) room.hintTimes.push(Date.now() + dt * (0.35 + 0.55 * (i - 1) / Math.max(1, nh)) );
@@ -208,7 +231,7 @@ function chooseWord(room, idx) {
 
 function revealHint(room) {
   const g = graphemes(room.word.ta);
-  const hidden = g.map((ch, i) => i).filter(i => g[i] !== ' ' && !room.revealed.has(i));
+  const hidden = g.map((ch, i) => i).filter(i => g[i] !== ' ' && !isPunct(g[i]) && !room.revealed.has(i));
   if (hidden.length <= 1) return;
   room.revealed.add(hidden[rnd(hidden.length)]);
   broadcastState(room);
@@ -220,7 +243,7 @@ function endTurn(room, reason) {
   // drawer points already accumulated per guesser
   room.lastTurn = {
     reason, drawerId: room.drawerId,
-    word: word ? { ta: word.ta, en: word.en, translit: word.translit } : null,
+    word: word ? { ta: word.ta, en: word.en, translit: word.translit, lang: word.lang } : null,
     scores: playerList(room).map(p => ({ id: p.id, name: p.name, delta: room.turnScores[p.id] || 0 })).sort((a, b) => b.delta - a.delta),
   };
   if (!room.word && word) room.word = word; // so hint shows on reveal
@@ -377,6 +400,8 @@ io.on('connection', socket => {
     for (const k of Object.keys(LIMITS)) if (k in d) s[k] = clamp(parseInt(d[k], 10) || DEFAULTS[k], ...LIMITS[k]);
     if (WORD_MODES.includes(d.wordMode)) s.wordMode = d.wordMode;
     if (DIFFS.includes(d.difficulty)) s.difficulty = d.difficulty;
+    if (WORD_LANGS.includes(d.wordLang)) s.wordLang = d.wordLang;
+    if (CATEGORY_KEYS.includes(d.category)) s.category = d.category;
     if ('customWords' in d) s.customWords = String(d.customWords || '').slice(0, 10000);
     if ('customOnly' in d) s.customOnly = !!d.customOnly;
     if ('acceptEnglish' in d) s.acceptEnglish = !!d.acceptEnglish;
@@ -530,5 +555,5 @@ io.on('connection', socket => {
   });
 });
 
-server.listen(PORT, () => console.log(`Tamil Skribbl running on http://localhost:${PORT} with ${WORDDB.words.length} words`));
+server.listen(PORT, () => console.log(`Tamil Skribbl running on http://localhost:${PORT} with ${WORDDB.words.length} Tamil + ${EN_WORDS.length} English words`));
 module.exports = { server, rooms };

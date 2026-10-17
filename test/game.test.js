@@ -268,6 +268,89 @@ async function waitFor(fn, ms = 8000, label = 'condition') {
       [w1, w2, w3].forEach(c => c.s.close());
     }
 
+    // ---- English word list mode ----
+    {
+      const EN = require('../data/words-en.json').words;
+      const enSet = new Map(EN.map(w => [w.word, w]));
+      const e1 = client('E1'), e2 = client('E2'), e3 = client('E3');
+      const er = await emitAck(e1, 'room:create', { name: 'E1', pid: e1.pid });
+      for (const c of [e2, e3]) await emitAck(c, 'room:join', { code: er.code, name: c.name, pid: c.pid });
+      await waitFor(() => e1.state && e1.state.settings.wordLang === 'ta', 2000);
+      ok(true, "word language defaults to Tamil ('ta')");
+      e1.s.emit('settings:update', { wordLang: 'en', drawTime: 60, rounds: 2, wordCount: 3 });
+      await waitFor(() => e3.state.settings.wordLang === 'en', 2000, 'en setting');
+      e1.s.emit('game:start');
+      await waitFor(() => e1.state.phase === 'choosing', 3000);
+      const es = [e1, e2, e3];
+      const ed = es.find(c => c.pid === e1.state.drawerId);
+      const ech = await waitFor(() => ed.state.choices, 2000, 'en choices');
+      ok(ech.length === 3 && ech.every(w => enSet.has(w.ta) && w.lang === 'en'), `English mode offers 3 English words: ${ech.map(w => w.ta).join(', ')}`);
+      // pick the longest word for blank / close tests
+      const idx = ech.map(w => w.ta.length).reduce((bi, l, i, a) => l > a[bi] ? i : bi, 0);
+      const ew = ech[idx].ta;
+      ed.s.emit('word:choose', idx);
+      await waitFor(() => ed.state.phase === 'drawing', 2000);
+      const [eg1, eg2] = es.filter(c => c !== ed);
+      const eh = eg1.state.hint;
+      const letters = ew.replace(/[^a-z]/g, '').length;
+      const spaces = (ew.match(/ /g) || []).length;
+      ok(eh.count === letters && eh.ta.filter(x => x.s).length === spaces && eh.ta.every(x => x.s || !x.c || x.c === '-'), `guessers see ${letters} letter blanks${spaces ? ` + ${spaces} space(s)` : ''} for "${ew}" (no letters leaked)`);
+      ok(!ed.state.hint.meaning && !ed.state.hint.translit && ed.state.hint.full, 'drawer sees the English word with nothing extra under it');
+      if (ew.replace(/ /g, '').length >= 4) {
+        const typo = ew.slice(0, -1) + (ew.slice(-1) === 'z' ? 'y' : 'z');
+        const n0 = eg1.chats.length;
+        eg1.s.emit('chat', typo);
+        await waitFor(() => eg1.chats.slice(n0).some(m => m.kind === 'close'), 2000, 'en close');
+        ok(true, `English near-miss "${typo}" gets a "close!" notice`);
+      }
+      eg1.s.emit('chat', '  ' + ew.toUpperCase() + ' ');
+      await waitFor(() => ed.state.players.find(p => p.id === eg1.pid).guessed, 2000, 'en guess');
+      ok(true, `English guess "${ew.toUpperCase()}" accepted (case-insensitive)`);
+      eg2.s.emit('chat', ew.replace(/ /g, ''));
+      await waitFor(() => es.every(c => c.state.phase === 'turnEnd'), 3000, 'en turn end');
+      ok(eg2.state.lastTurn.word.ta === ew && eg2.state.lastTurn.reason === 'allGuessed', 'guess without spaces accepted; turn ends with English word revealed');
+      es.forEach(c => c.s.close());
+
+      // difficulty + category filters apply to the English list
+      const f1 = client('F1'), f2 = client('F2');
+      const fr = await emitAck(f1, 'room:create', { name: 'F1', pid: f1.pid });
+      await emitAck(f2, 'room:join', { code: fr.code, name: 'F2', pid: f2.pid });
+      f1.s.emit('settings:update', { wordLang: 'en', difficulty: 'easy', category: 'animals', wordCount: 5 });
+      await waitFor(() => f2.state && f2.state.settings.category === 'animals', 2000);
+      f1.s.emit('game:start');
+      await waitFor(() => f1.state.phase === 'choosing', 3000);
+      const fd = [f1, f2].find(c => c.pid === f1.state.drawerId);
+      const fch = await waitFor(() => fd.state.choices, 2000);
+      ok(fch.length === 5 && fch.every(w => enSet.get(w.ta) && enSet.get(w.ta).difficulty === 'easy' && enSet.get(w.ta).category === 'animals'), `difficulty "easy" + category "animals" filter English words: ${fch.map(w => w.ta).join(', ')}`);
+      [f1, f2].forEach(c => c.s.close());
+
+      // mixed mode: every offer has both Tamil and English words
+      const x1 = client('X1'), x2 = client('X2');
+      const xr = await emitAck(x1, 'room:create', { name: 'X1', pid: x1.pid });
+      await emitAck(x2, 'room:join', { code: xr.code, name: 'X2', pid: x2.pid });
+      x1.s.emit('settings:update', { wordLang: 'mixed', wordCount: 3, drawTime: 60 });
+      await waitFor(() => x2.state && x2.state.settings.wordLang === 'mixed', 2000);
+      x1.s.emit('game:start');
+      let mixedOk = true, tamilGuessed = false, englishGuessed = false;
+      for (let turn = 0; turn < 4; turn++) {
+        await waitFor(() => x1.state.phase === 'choosing' && x2.state.phase === 'choosing', 9000, 'mixed choosing');
+        const xd = [x1, x2].find(c => c.pid === x1.state.drawerId), xg = [x1, x2].find(c => c !== xd);
+        const xch = await waitFor(() => xd.state.choices, 2000);
+        const langs = new Set(xch.map(w => w.lang));
+        if (!(langs.has('ta') && langs.has('en'))) mixedOk = false;
+        const pickLang = turn % 2 ? 'en' : 'ta';
+        const pi = xch.findIndex(w => w.lang === pickLang);
+        xd.s.emit('word:choose', pi);
+        await waitFor(() => xd.state.phase === 'drawing', 2000);
+        xg.s.emit('chat', xch[pi].ta);
+        await waitFor(() => xd.state.phase === 'turnEnd' || xd.state.phase === 'gameEnd', 3000, 'mixed guess');
+        if (pickLang === 'ta') tamilGuessed = true; else englishGuessed = true;
+      }
+      ok(mixedOk, 'mixed mode: every word offer contains both Tamil (த) and English (EN) words (4 turns)');
+      ok(tamilGuessed && englishGuessed, 'mixed mode: Tamil and English words can both be guessed');
+      [x1, x2].forEach(c => c.s.close());
+    }
+
     // fresh room for the hint test
     const h1 = client('H1'), h2 = client('H2');
     const hr = await emitAck(h1, 'room:create', { name: 'H1', pid: h1.pid });
