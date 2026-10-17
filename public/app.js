@@ -42,10 +42,11 @@ renderAvatarMaker();
 
 const inviteCode = (new URLSearchParams(location.search).get('room') || location.hash.replace('#', '') || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
 if (inviteCode) { $('#codeInput').value = inviteCode; }
+let META = null; // word-list meta (categories) from /api/meta
 function refreshHomeTexts() {
   const jb = $('#joinInviteBtn');
   if (inviteCode) { jb.hidden = false; jb.textContent = t('joinInvite', { code: inviteCode }); }
-  fetch('/api/meta').then(r => r.json()).then(m => { $('#wordCountNote').textContent = t('wordsNote', { n: m.words, c: m.categories.length }); }).catch(() => {});
+  fetch('/api/meta').then(r => r.json()).then(m => { META = m; $('#wordCountNote').textContent = t('wordsNote', { n: m.words, e: m.wordsEn, c: m.categories.length }); if (S) render(); }).catch(() => {});
 }
 
 function getName() { const n = nameInput.value.trim(); localStorage.setItem('ts_name', n); return n; }
@@ -353,7 +354,7 @@ function render() {
   const meP = me();
   const guessing = S.phase === 'drawing' && S.drawerId !== S.you && !(meP && meP.guessed);
   $('#chatInput').placeholder = guessing ? t('chatGuess') : t('chatPh');
-  Voice.update(guessing && S.settings.voiceGuess !== false);
+  Voice.update(guessing && S.settings.voiceGuess !== false, S.settings.wordLang || 'ta');
   updateCursor();
 }
 
@@ -418,7 +419,7 @@ function renderStage() {
   if (S.phase === 'choosing') {
     if (S.drawerId === S.you && S.choices) {
       html = `<h2>${t('chooseWord')}</h2><div class="choices">${S.choices.map((w, i) =>
-        `<button class="choice" data-choice="${i}"><span class="c-ta">${esc(w.ta)}</span><span class="c-en">${esc(w.translit || '')}${w.translit && w.en ? ' · ' : ''}${esc((w.en || '').split('/')[0])}</span></button>`).join('')}</div><div class="ov-timer" data-countdown></div>`;
+        `<button class="choice" data-choice="${i}">${S.settings.wordLang === 'mixed' || w.lang === 'custom' ? `<span class="c-tag ${w.lang}">${w.lang === 'en' ? 'EN' : w.lang === 'ta' ? 'த' : '✎'}</span>` : ''}<span class="c-ta ${w.lang === 'en' ? 'is-en' : ''}">${esc(w.ta)}</span><span class="c-en">${esc(w.translit || '')}${w.translit && w.en ? ' · ' : ''}${esc((w.en || '').split('/')[0])}</span></button>`).join('')}</div><div class="ov-timer" data-countdown></div>`;
     } else {
       const d = S.players.find(p => p.id === S.drawerId);
       html = `<div class="ov-av bounce">${d ? Avatar.svg(d.avatar, 90) : ''}</div><h2>${t('isChoosing', { name: esc(pname(S.drawerId)) })}</h2>`;
@@ -460,6 +461,11 @@ function renderLobby() {
   const enough = S.players.filter(p => p.connected).length >= 2;
   L.innerHTML = `<div class="lobby-inner">
     <h2>⚙️ ${t('settings')}</h2>
+    <div class="wordlang">
+      <span class="wl-title">${t('wordLang')}</span>
+      <div class="wl-opts">${['ta', 'en', 'mixed'].map(v => `<label class="wl-opt ${s.wordLang === v ? 'sel' : ''} ${isHost ? '' : 'ro'}"><input type="radio" name="wordLang" value="${v}" data-set="wordLang" ${s.wordLang === v ? 'checked' : ''} ${isHost ? '' : 'disabled'}><b>${v === 'ta' ? 'அ' : v === 'en' ? 'A' : 'அA'}</b><span>${t('wl_' + v)}</span></label>`).join('')}</div>
+      <div class="wl-note">${t('wlNote_' + (s.wordLang || 'ta'), { n: META ? META.words : '', e: META ? META.wordsEn : '' })}</div>
+    </div>
     <div class="settings-grid">
       ${num('maxPlayers', 2, 12)}
       ${num('rounds', 2, 10)}
@@ -468,8 +474,10 @@ function renderLobby() {
       ${num('hints', 0, 5)}
       ${sel('wordMode', ['normal', 'hidden', 'both'])}
       ${sel('difficulty', ['all', 'easy', 'medium', 'hard'])}
+      <label class="set"><span>${t('category')}</span><select data-set="category" ${isHost ? '' : 'disabled'}>
+        <option value="all">${t('all')}</option>${(META ? META.categories : []).map(c => `<option value="${c.key}" ${c.key === s.category ? 'selected' : ''}>${esc(I18N.lang === 'ta' ? c.ta : c.en)}</option>`).join('')}</select></label>
     </div>
-    ${chk('acceptEnglish')}
+    ${s.wordLang === 'en' ? '' : chk('acceptEnglish')}
     ${chk('voiceGuess')}
     <label class="set block"><span>${t('customWords')}</span>
       <textarea id="customWordsBox" data-set="customWords" rows="2" placeholder="${t('customHint')}" ${isHost ? '' : 'disabled'}>${esc(s.customWords)}</textarea></label>

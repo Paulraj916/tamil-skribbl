@@ -1,7 +1,7 @@
 // Voice guessing via the Web Speech API (Chrome, Edge, Safari). Tamil (ta-IN) by default, toggle to en-IN.
 window.Voice = (() => {
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  let o = null, rec = null, listening = false, lang = localStorage.getItem('ts_voice_lang') || 'ta-IN';
+  let o = null, rec = null, listening = false, pref = localStorage.getItem('ts_voice_lang') || 'ta-IN', lang = pref, mode = 'ta';
   let denied = false, silenceTimer = null, enabled = false, gotFinal = false;
   const SILENCE_MS = 6000;
 
@@ -66,16 +66,21 @@ window.Voice = (() => {
     o = opts;
     o.btn.addEventListener('click', () => { if (listening) stop(); else { Sound && Sound.unlock && Sound.unlock(); start(); } });
     o.langBtn.addEventListener('click', () => {
-      lang = lang === 'ta-IN' ? 'en-IN' : 'ta-IN'; localStorage.setItem('ts_voice_lang', lang); setTitle();
+      lang = pref = lang === 'ta-IN' ? 'en-IN' : 'ta-IN'; localStorage.setItem('ts_voice_lang', pref); setTitle();
       if (listening) { stop(); }
     });
     setTitle();
   }
   // show only while guessing (not drawer, not yet guessed) and the host allows voice guessing
-  function update(show) {
+  // wordMode: 'ta' (default ta-IN, toggle shown), 'en' (forced en-IN, no toggle), 'mixed' (toggle shown)
+  function update(show, wordMode) {
     if (!o) return;
     enabled = !!show;
-    o.btn.hidden = !show; o.langBtn.hidden = !show || !SR || denied;
+    if (wordMode && wordMode !== mode) {
+      mode = wordMode;
+      lang = mode === 'en' ? 'en-IN' : mode === 'ta' ? 'ta-IN' : pref;
+    }
+    o.btn.hidden = !show; o.langBtn.hidden = !show || !SR || denied || mode === 'en';
     o.btn.disabled = !SR || denied;
     if (!show && listening) stop();
     setTitle();
