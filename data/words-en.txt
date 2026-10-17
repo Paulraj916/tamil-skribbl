@@ -1,0 +1,64 @@
+# Format: "# category-key" headers, then lines "e: word, word" (e=easy, m=medium, h=hard).
+# Category keys match the Tamil list so one category filter works for both languages.
+# animals
+e: cat, dog, cow, pig, horse, sheep, goat, duck, chicken, rabbit, mouse, lion, tiger, elephant, monkey, bear, fish, bird, frog, snake, turtle, giraffe, zebra, owl, bee, ant, spider, butterfly, snail, whale, shark, crab, dolphin, penguin, fox, wolf, deer, camel, kangaroo, panda
+m: octopus, squirrel, hedgehog, raccoon, koala, gorilla, parrot, peacock, flamingo, eagle, swan, crow, pigeon, bat, donkey, rooster, puppy, kitten, lizard, crocodile, hippo, rhino, cheetah, leopard, jellyfish, starfish, seahorse, ladybug, dragonfly, mosquito, caterpillar, worm, scorpion, lobster, seal, walrus, polar bear, moose, beaver, otter, sloth, llama, ostrich, hamster, goldfish, mole, skunk, chameleon, toucan, woodpecker
+h: platypus, armadillo, porcupine, chipmunk, anteater, narwhal, stingray, manatee, iguana, tadpole, centipede, grasshopper, firefly, cockroach, vulture, pelican, hummingbird, mammoth, dinosaur, unicorn, dragon, mermaid, yeti, phoenix, bison, warthog, meerkat, lemur, mongoose
+# food
+e: apple, banana, orange, grape, lemon, cherry, strawberry, watermelon, pineapple, mango, pear, peach, carrot, tomato, potato, onion, corn, egg, bread, cake, cookie, pizza, burger, sandwich, ice cream, candy, chocolate, milk, cheese, butter, rice, soup, salad, juice, tea, coffee, honey, donut, popcorn, lollipop
+m: coconut, avocado, kiwi, blueberry, papaya, pomegranate, broccoli, cabbage, cucumber, pumpkin, mushroom, garlic, pepper, peas, beans, lettuce, eggplant, chili, pancake, waffle, muffin, cupcake, pie, pretzel, noodles, spaghetti, sushi, taco, burrito, hot dog, french fries, omelette, cereal, yogurt, jam, peanut, walnut, cashew, almond, toast, bagel, croissant, milkshake, smoothie, lemonade, popsicle, cotton candy, gingerbread, marshmallow, jelly
+h: asparagus, artichoke, cauliflower, zucchini, radish, beetroot, celery, ginger, cinnamon, dumpling, samosa, dosa, idli, biryani, curry, lasagna, ravioli, nachos, kebab, meatball, sausage, fortune cookie, cheesecake, pudding, brownie, cinnamon roll, caramel, toffee, pickle
+# household
+e: chair, table, bed, door, window, lamp, clock, cup, plate, spoon, fork, knife, bowl, bottle, key, book, pillow, blanket, sofa, tv, phone, box, bag, bucket, broom, mirror, comb, toothbrush, soap, towel, umbrella, candle, basket, fan, sink, toilet, bathtub, shower, stairs, roof
+m: fridge, oven, microwave, toaster, kettle, teapot, pan, ladle, blender, washing machine, vacuum cleaner, iron, curtain, carpet, cushion, wardrobe, drawer, shelf, bookshelf, cupboard, doorbell, mailbox, chimney, fireplace, ladder, hammer, screwdriver, wrench, saw, nail, screw, drill, scissors, needle, thread, button, rope, chain, padlock, flashlight, battery, light bulb, plug, remote, alarm clock, hanger, mop, sponge, dustpan, trash can
+h: chandelier, thermostat, faucet, plunger, doormat, coat rack, rocking chair, hammock, cradle, crib, high chair, lampshade, extension cord, toolbox, wheelbarrow, watering can, lawn mower, rake, shovel, hose, sprinkler, fence, gate, garage, attic, basement, doorknob, peephole, window blinds, ceiling fan
+# nature
+e: sun, moon, star, cloud, rain, snow, tree, flower, leaf, grass, rock, mountain, river, sea, beach, island, rainbow, fire, wind, lake
+m: volcano, waterfall, desert, forest, jungle, cave, cliff, valley, hill, pond, ocean, wave, lightning, thunder, tornado, storm, snowflake, icicle, puddle, sunrise, sunset, palm tree, cactus, rose, sunflower, tulip, lotus, daisy, bamboo, seed, root, branch, acorn, pine cone, coral, seashell, sand, mud, iceberg
+h: glacier, avalanche, earthquake, tsunami, geyser, canyon, swamp, oasis, meadow, hurricane, eclipse, comet, meteor, galaxy, constellation, aurora, fog, dew, moss, vine, cherry blossom, maple leaf, coconut tree, sand dune, whirlpool, stalactite, crater, horizon, tide, fossil
+# body
+e: eye, ear, nose, mouth, hand, foot, leg, arm, head, hair, tooth, finger, toe, heart, face, lips, tongue, knee, neck, back
+m: elbow, shoulder, thumb, eyebrow, eyelash, beard, mustache, cheek, chin, forehead, ankle, wrist, fingernail, belly button, skeleton, skull, brain, bone, muscle, lungs, stomach, footprint, fingerprint, freckles, dimple, ponytail, braid, wink, smile, tears
+h: kidney, liver, rib, spine, heel, knuckle, armpit, nostril, eyeball, sweat, blood, vein, goosebumps, bald, wrinkle, tattoo, braces
+# vehicles
+e: car, bus, train, plane, boat, ship, bike, truck, taxi, rocket
+m: helicopter, motorcycle, scooter, tractor, ambulance, fire truck, police car, submarine, sailboat, canoe, kayak, skateboard, roller skates, tram, van, jeep, auto rickshaw, bulldozer, crane, forklift, hot air balloon, parachute, spaceship, ufo, wheel, tire, steering wheel, traffic light, bridge, road
+h: limousine, convertible, cable car, monorail, hovercraft, glider, jet ski, snowmobile, unicycle, tandem bicycle, sleigh, chariot, wagon, rickshaw, gondola, yacht, ferry, tugboat, cargo ship, space shuttle, satellite, airport, runway, gas station, parking lot, speed bump, seatbelt, windshield, license plate, train track
+# places
+e: house, school, park, shop, farm, zoo, castle, tent, church, temple, hospital, bank
+m: library, museum, restaurant, hotel, office, factory, stadium, playground, swimming pool, cinema, theater, circus, lighthouse, windmill, igloo, pyramid, palace, fort, tower, skyscraper, bakery, post office, police station, fire station, prison, market, mall, garden, barn, hut, cabin, treehouse, bus stop, train station
+h: aquarium, planetarium, observatory, cathedral, mosque, monastery, colosseum, eiffel tower, taj mahal, statue of liberty, great wall, big ben, stonehenge, amusement park, roller coaster, ferris wheel, carousel, haunted house, maze, dungeon, campsite, harbor, dam, tunnel, well, ruins
+# objects
+e: pen, pencil, eraser, ruler, paper, crayon, glue, backpack, ball, kite, balloon, doll, teddy bear, robot, gift, crown, ring, flag, map, coin, money, bell, camera, computer, glasses, envelope, letter, newspaper, magnet, telescope
+m: notebook, calculator, globe, compass, magnifying glass, microscope, paintbrush, easel, sharpener, stapler, paperclip, clipboard, chalk, blackboard, whistle, trophy, medal, sword, shield, bow, arrow, axe, anchor, treasure chest, puzzle, dice, playing cards, yo-yo, spinning top, marbles, rubber duck, snow globe, piggy bank, wallet, purse, suitcase, passport, ticket, stamp, postcard, laptop, keyboard, headphones, microphone, speaker, tablet, smartphone, charger, hourglass, magic wand
+h: boomerang, binoculars, periscope, metronome, kaleidoscope, slingshot, catapult, cannon, joystick, game controller, pen drive, printer, router, satellite dish, antenna, barcode, qr code, hologram, time machine, crystal ball, treasure map, message in a bottle, dreamcatcher, wind chime, sundial, scroll, quill, inkwell, typewriter, gramophone
+# clothing
+e: hat, cap, shoe, sock, shirt, dress, skirt, pants, jacket, coat, scarf, glove, belt, tie, boot
+m: sweater, hoodie, jeans, shorts, pajamas, raincoat, sandals, slippers, sneakers, high heels, bow tie, necklace, bracelet, earrings, sunglasses, helmet, mask, apron, uniform, swimsuit, saree, turban, wig, mittens, beanie, overalls, vest, cape
+h: tuxedo, kimono, kilt, poncho, sombrero, top hat, cowboy hat, baseball cap, flip flops, ballet shoes, diving mask, wedding dress, bathrobe, tiara, monocle, locket, cufflinks, suspenders, beret, headband
+# sports
+e: football, cricket, tennis, golf, chess, swing, slide, running, swimming, jump rope
+m: basketball, volleyball, baseball, badminton, hockey, boxing, karate, yoga, skiing, surfing, skating, bowling, archery, fishing, cycling, wrestling, darts, table tennis, hide and seek, tug of war, hopscotch, kabaddi, carrom, seesaw, frisbee, goal, referee, olympics, gym, dumbbell
+h: snorkeling, scuba diving, skydiving, bungee jumping, rock climbing, gymnastics, fencing, rowing, javelin, high jump, long jump, marathon, relay race, trampoline, hula hoop, pinball, bingo, jigsaw, checkers, snakes and ladders
+# professions
+e: baby, king, queen, doctor, teacher, farmer, police, pirate, clown, ghost
+m: nurse, chef, pilot, firefighter, astronaut, artist, singer, dancer, magician, soldier, sailor, fisherman, carpenter, plumber, mechanic, scientist, dentist, postman, waiter, cowboy, ninja, princess, prince, knight, wizard, witch, fairy, angel, superhero, zombie, vampire, alien, snowman, scarecrow, mummy, grandma, grandpa, twins, bride, student
+h: archaeologist, astronomer, detective, lifeguard, photographer, gardener, barber, tailor, judge, lawyer, cashier, librarian, juggler, acrobat, ventriloquist, lumberjack, beekeeper, shepherd, goalkeeper, conductor, sculptor, explorer, caveman, viking, samurai, pharaoh, mime, puppet, genie
+# actions
+e: run, jump, swim, sleep, eat, drink, cry, laugh, sing, dance, read, write, walk, fly, cook, clap, kick, throw, climb, wave goodbye
+m: sneeze, yawn, whistling, sweep, paint, dig, brush teeth, wash hands, take a bath, hug, kiss, shout, whisper, think, dream, push, pull, catch, crawl, skip, hop, juggle, knit, sew, pray, salute, high five, shake hands, tickle, sit, stand, kneel, pour, stir, cut, dive, row, slip
+h: meditate, sleepwalk, daydream, hiccup, snore, shiver, sunbathe, hitchhike, eavesdrop, somersault, cartwheel, moonwalk, tiptoe, faint, stretch, blink, shrug, giggle, celebrate, facepalm, selfie
+# culture
+e: birthday, party, christmas tree, santa claus, fireworks, diwali, pongal, kolam
+m: rangoli, diya, lantern, firecracker, sparkler, garland, wedding, holi, halloween, easter egg, jack o lantern, candy cane, wreath, reindeer, snowball, confetti, pinata, birthday cake, party hat, henna, new year, valentine, cupid
+h: ganesha, jallikattu, bharatanatyam, nativity, menorah, dreidel, maypole, totem pole, carnival, parade, masquerade, lion dance, dragon boat, thanksgiving, mistletoe, stocking, ornament, tinsel
+# music
+e: drum, guitar, piano, trumpet, flute, violin, song
+m: harp, saxophone, trombone, tuba, accordion, harmonica, xylophone, cymbals, tambourine, banjo, ukulele, cello, bagpipes, maracas, drumsticks, radio, jukebox, record player, veena, tabla, sitar
+h: mridangam, nadaswaram, didgeridoo, castanets, bugle, organ, orchestra, choir, band, concert, karaoke, music box, gong
+# space
+e: circle, square, triangle, rectangle, diamond, oval
+m: pentagon, hexagon, octagon, cube, cylinder, cone, sphere, spiral, zigzag, cross, crescent, planet, earth, mars, saturn, black hole, solar system, asteroid
+h: question mark, exclamation mark, infinity, peace sign, yin yang, recycle symbol, dollar sign, percent, hashtag, smiley face, thumbs up, emoji, checkmark, wifi symbol
+# tech
+h: video game, drone, virtual reality, smartwatch, power bank, selfie stick, webcam
