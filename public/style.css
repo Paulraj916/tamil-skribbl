@@ -273,7 +273,22 @@ body.is-drawer { --tbh: 66px; }
 
 /* lobby gets more room than the 4:3 canvas on phones */
 @media (max-width: 820px) {
-  body.in-lobby .stage { aspect-ratio: auto; height: 62dvh; }
+  body.in-lobby .stage { aspect-ratio: auto; height: calc(var(--app-h, 100dvh) * .62); }
+  body.in-lobby.kb-open .stage { height: max(120px, calc(var(--app-h, 100dvh) - var(--top-h, 60px) - 150px)); }
   body.in-lobby .layout { grid-template-rows: auto auto minmax(0, 1fr); }
 }
 @media (min-width: 821px) { body.in-lobby .stage { aspect-ratio: auto; height: 100%; width: 100% !important; } }
+
+/* ---------- phones: on-screen keyboard ----------
+   The game screen is sized to the *visible* viewport (--app-h, set from visualViewport in app.js),
+   the page itself never scrolls, and the canvas shrinks so the word hint (top bar), the chat log
+   and the guess box all fit when the keyboard is open. Desktop is untouched. */
+@media (max-width: 820px) {
+  html.in-game, html.in-game body { height: 100%; overflow: hidden; overscroll-behavior: none; }
+  html.in-game #game { position: fixed; left: 0; right: 0; top: 0; height: var(--app-h, 100dvh); overflow: hidden; }
+  .stage { width: min(100%, calc((var(--app-h, 100dvh) - var(--top-h, 60px) - var(--tb-h, 0px) - var(--chat-min, 150px) - 20px) * 4 / 3)) !important; }
+  body.kb-open { --chat-min: 130px; }
+  .players, .chat { min-height: 0; }
+  body.kb-open .word-sub { display: none; }
+  body.kb-open .round-banner { display: none; }
+}

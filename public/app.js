@@ -57,7 +57,7 @@ function enterRoom(code) {
   history.replaceState(null, '', '?room=' + code);
   $('#home').classList.remove('active'); $('#game').classList.add('active');
   $('#chatLog').innerHTML = '';
-  fitCanvas();
+  fitCanvas(); fitViewport();
 }
 $('#createBtn').onclick = () => {
   Sound.unlock(); homeError();
@@ -85,7 +85,7 @@ socket.on('connect', () => {
 function goHome() {
   roomCode = null; S = null; sessionStorage.removeItem('ts_room');
   history.replaceState(null, '', location.pathname);
-  $('#game').classList.remove('active'); $('#home').classList.add('active');
+  $('#game').classList.remove('active'); $('#home').classList.add('active'); fitViewport();
 }
 
 // ---------- global buttons ----------
@@ -275,6 +275,32 @@ canvas.addEventListener('lostpointercapture', endStroke);
 // keep cursor size right when resized
 function fitCanvas() { updateCursor(); }
 window.addEventListener('resize', fitCanvas);
+
+// ---------- phones: keep the layout inside the visible viewport when the keyboard opens ----------
+function isPhone() { return matchMedia('(max-width: 820px)').matches; }
+function fitViewport() {
+  const rootStyle = document.documentElement.style;
+  const vv = window.visualViewport;
+  const inGame = $('#game').classList.contains('active');
+  document.documentElement.classList.toggle('in-game', inGame);
+  if (!isPhone() || !inGame) { rootStyle.removeProperty('--app-h'); return; }
+  // ignore pinch-zoom; otherwise use the visible height (excludes iOS/Android keyboard)
+  const h = vv && Math.abs(vv.scale - 1) < 0.01 ? vv.height : window.innerHeight;
+  rootStyle.setProperty('--app-h', Math.round(h) + 'px');
+  rootStyle.setProperty('--top-h', $('.topbar').offsetHeight + 'px');
+  const tb = $('#toolbar');
+  rootStyle.setProperty('--tb-h', tb.hidden ? '0px' : tb.offsetHeight + 4 + 'px');
+  // iOS pans the page up to show the focused input; the game screen is already sized to fit, so undo it
+  if (window.scrollY || document.documentElement.scrollTop) window.scrollTo(0, 0);
+}
+const isTextField = el => el && (el.tagName === 'TEXTAREA' || (el.tagName === 'INPUT' && /^(text|search|email|url|tel|number|)$/.test(el.type || '')));
+document.addEventListener('focusin', e => { if (isTextField(e.target) && e.target.closest('#game') && isPhone()) document.body.classList.add('kb-open'); fitViewport(); });
+document.addEventListener('focusout', () => { setTimeout(() => { if (!isTextField(document.activeElement)) document.body.classList.remove('kb-open'); fitViewport(); }, 50); });
+if (window.visualViewport) { visualViewport.addEventListener('resize', fitViewport); visualViewport.addEventListener('scroll', fitViewport); }
+window.addEventListener('resize', fitViewport);
+window.addEventListener('scroll', () => { if (isPhone() && $('#game').classList.contains('active') && window.scrollY) window.scrollTo(0, 0); }, { passive: true });
+new ResizeObserver(fitViewport).observe($('.topbar'));
+new ResizeObserver(fitViewport).observe($('#toolbar'));
 
 // ---------- chat ----------
 const chatLog = $('#chatLog');

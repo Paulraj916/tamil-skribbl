@@ -4,7 +4,7 @@ A skribbl.io-style multiplayer **drawing & guessing game with Tamil words**, mad
 
 - Private rooms with an invite link and room code, 2 to 12 players
 - 834 hand-picked, drawable, family-friendly Tamil words in 21 categories (animals, food, festivals and culture, places, actions and more), each with an English meaning, transliteration and difficulty
-- **1,182 English words** (16 categories, easy/medium/hard) so friends and family who don't know Tamil can play too
+- **2,277 English words** (21 categories, easy/medium/hard) so friends and family who don't know Tamil can play too
 - **Word language** (host setting): **Tamil** (default), **English**, or **Mixed**. In Mixed, every word offer includes both Tamil (த) and English (EN) words. The category and difficulty filters work for both lists
 - The drawer picks 1 of N Tamil words (auto-pick after 15 s). Others see one blank per Tamil letter (grapheme cluster, so கா counts as one letter), with hints that reveal letters progressively
 - Guess in **Tamil, English or Tanglish** (for example யானை / elephant / yaanai / yanai). "Close!" notices for near misses
@@ -40,3 +40,6 @@ English words live in `data/words-en.txt`, one line per difficulty under each `#
 ## Tech
 Node.js, Express and Socket.IO. Vanilla JS front end with no build step. In-memory rooms, so nothing is stored.
 Noto Sans Tamil font loaded from Google Fonts (SIL Open Font License).
+
+## Mobile keyboard check
+`node test/mobile-keyboard.js` opens the game in headless Chrome as an iPhone 13 and a Pixel 7, focuses the guess box, shrinks the viewport like the on-screen keyboard does, and checks that the word hint, the guess box and a scrollable chat all stay on screen without the page scrolling. Screenshots go to `screenshots/kb-*.png`.
