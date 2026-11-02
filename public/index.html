@@ -115,6 +115,18 @@
   <div class="toast" id="toast" hidden></div>
 </section>
 
+<div class="confirm-wrap" id="leaveConfirm" role="dialog" aria-modal="true" aria-labelledby="leaveTitle" hidden>
+  <div class="confirm-box">
+    <div class="confirm-emoji">🚪</div>
+    <h3 id="leaveTitle"></h3>
+    <p id="leaveSub"></p>
+    <div class="confirm-btns">
+      <button type="button" class="btn btn-green" id="leaveStay"></button>
+      <button type="button" class="btn btn-red" id="leaveGo"></button>
+    </div>
+  </div>
+</div>
+
 <script src="/socket.io/socket.io.js"></script>
 <script src="avatar.js"></script>
 <script src="i18n.js"></script>

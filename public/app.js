@@ -54,7 +54,8 @@ function homeError(k) { $('#homeError').textContent = k ? t(k) : ''; }
 function enterRoom(code) {
   roomCode = code;
   sessionStorage.setItem('ts_room', code);
-  history.replaceState(null, '', '?room=' + code);
+  history.replaceState(history.state && history.state.tsGuard ? history.state : null, '', '?room=' + code);
+  armBackGuard();
   $('#home').classList.remove('active'); $('#game').classList.add('active');
   $('#chatLog').innerHTML = '';
   fitCanvas(); fitViewport();
@@ -95,8 +96,42 @@ document.addEventListener('click', e => {
   const a = b.dataset.action;
   if (a === 'lang') { I18N.toggle(); refreshHomeTexts(); if (S) render(); }
   if (a === 'sound') { Sound.toggle(); updateSoundBtn(); }
-  if (a === 'leave') { if (confirm(t('leave'))) { socket.emit('room:leave'); goHome(); } }
+  if (a === 'leave') showLeaveConfirm();
 });
+// ---------- back button / swipe-back guard ----------
+// While in a room, keep an extra history entry on top so the phone's back button / back gesture
+// lands on it (popstate) instead of leaving the page; then ask before leaving.
+function armBackGuard() {
+  if (!roomCode) return;
+  if (!(history.state && history.state.tsGuard)) history.pushState({ tsGuard: 1 }, '', location.href);
+}
+function showLeaveConfirm() {
+  $('#leaveTitle').textContent = t('leaveTitle'); $('#leaveSub').textContent = t('leaveSub');
+  $('#leaveStay').textContent = t('stay'); $('#leaveGo').textContent = t('leaveBtn');
+  $('#leaveConfirm').hidden = false;
+  if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
+  $('#leaveStay').focus({ preventScroll: true });
+}
+function hideLeaveConfirm() { $('#leaveConfirm').hidden = true; }
+function leaveRoom() { hideLeaveConfirm(); socket.emit('room:leave'); goHome(); }
+window.addEventListener('popstate', e => {
+  if (!roomCode) { hideLeaveConfirm(); return; }
+  if (e.state && e.state.tsGuard) return;   // moved forward onto the guard entry
+  armBackGuard();                           // put the guard back so repeated presses are caught too
+  showLeaveConfirm();
+});
+$('#leaveStay').onclick = () => { hideLeaveConfirm(); armBackGuard(); };
+$('#leaveGo').onclick = leaveRoom;
+$('#leaveConfirm').addEventListener('click', e => { if (e.target.id === 'leaveConfirm') { hideLeaveConfirm(); armBackGuard(); } });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('#leaveConfirm').hidden) { hideLeaveConfirm(); armBackGuard(); } });
+// Chrome ignores history entries added before the user touched the page (e.g. after an auto-rejoin on reload),
+// so re-arm on the first interaction.
+document.addEventListener('pointerdown', armBackGuard, { capture: true, passive: true });
+// refresh / close tab during a game
+window.addEventListener('beforeunload', e => {
+  if (roomCode && S && S.phase && S.phase !== 'lobby') { e.preventDefault(); e.returnValue = ''; return ''; }
+});
+
 function updateSoundBtn() { $('#soundBtn').textContent = Sound.enabled ? '🔊' : '🔇'; }
 updateSoundBtn();
 
@@ -268,6 +303,12 @@ function endStroke(e) {
   flush(); localStroke.finish(); localStroke = null; activePointer = null;
   socket.emit('draw:end');
 }
+// touches on the canvas must never scroll, zoom, pull-to-refresh, swipe back or open the long-press menu
+const stopTouch = e => { if (e.cancelable) e.preventDefault(); };
+canvas.addEventListener('touchstart', stopTouch, { passive: false });
+canvas.addEventListener('touchmove', stopTouch, { passive: false });
+canvas.addEventListener('contextmenu', e => e.preventDefault());
+canvas.addEventListener('selectstart', e => e.preventDefault());
 canvas.addEventListener('pointerup', endStroke);
 canvas.addEventListener('pointercancel', endStroke);
 canvas.addEventListener('lostpointercapture', endStroke);

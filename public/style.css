@@ -114,7 +114,7 @@ input, select, textarea { font-family: inherit; font-size: 16px; }
 .stage { position: relative; width: 100%; max-height: 100%; aspect-ratio: 4/3; border-radius: var(--radius); overflow: hidden; background: #fff; box-shadow: 0 3px 0 rgba(0,0,0,.25); }
 @supports (width: min(1px, 1px)) { .stage { width: min(100%, calc((100dvh - 64px - 8px*4 - 16px - var(--tbh, 0px)) * 4 / 3)); } }
 body.is-drawer { --tbh: 66px; }
-#canvas { width: 100%; height: 100%; display: block; touch-action: none; user-select: none; -webkit-user-select: none; }
+#canvas { width: 100%; height: 100%; display: block; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; -webkit-user-drag: none; }
 .overlay { position: absolute; inset: 0; background: rgba(28, 16, 80, .78); display: flex; align-items: center; justify-content: center; color: #fff; text-align: center; padding: 16px; animation: fadein .25s; }
 @keyframes fadein { from { opacity: 0; } }
 .overlay-inner { max-width: 100%; max-height: 100%; overflow: auto; }
@@ -292,3 +292,17 @@ body.is-drawer { --tbh: 66px; }
   body.kb-open .word-sub { display: none; }
   body.kb-open .round-banner { display: none; }
 }
+
+/* in a game: no pull-to-refresh / overscroll swipe navigation; no long-press menus on the drawing area */
+html.in-game, html.in-game body { overscroll-behavior: none; overscroll-behavior-x: none; overscroll-behavior-y: none; }
+.toolbar { -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
+.toolbar { touch-action: manipulation; }
+/* leave confirmation (back button / 🚪) */
+.confirm-wrap { position: fixed; inset: 0; z-index: 100; background: rgba(20, 10, 60, .72); display: flex; align-items: center; justify-content: center; padding: 16px; animation: fadein .2s; touch-action: none; overscroll-behavior: contain; }
+.confirm-wrap[hidden] { display: none; }
+.confirm-box { background: #fff; color: var(--ink); border-radius: 14px; padding: 18px 18px 16px; width: min(340px, 100%); text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,.4); }
+.confirm-emoji { font-size: 34px; line-height: 1; }
+.confirm-box h3 { margin: 8px 0 6px; font-size: 21px; }
+.confirm-box p { margin: 0 0 14px; color: var(--muted); font-size: 15px; }
+.confirm-btns { display: flex; gap: 10px; }
+.confirm-btns .btn { flex: 1; }
