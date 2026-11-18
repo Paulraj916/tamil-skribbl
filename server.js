@@ -5,11 +5,13 @@ const crypto = require('crypto');
 const express = require('express');
 const { Server } = require('socket.io');
 const { graphemes, checkGuess, norm } = require('./lib/text');
+const Words = require('./lib/words');
 const WORDDB = require('./data/words.json');
 const WORDS_EN = require('./data/words-en.json');
 // Internally every word uses `ta` as "the word to guess" plus a `lang` tag ('ta' | 'en' | 'custom').
-const TA_WORDS = WORDDB.words.map(w => ({ ...w, lang: 'ta' }));
-const EN_WORDS = WORDS_EN.words.map(w => ({ ta: w.word, en: '', translit: '', category: w.category, difficulty: w.difficulty, lang: 'en' }));
+// Lists are de-duplicated case-insensitively once at boot.
+const TA_WORDS = Words.normalizeTamil(WORDDB.words);
+const EN_WORDS = Words.normalizeEnglish(WORDS_EN.words);
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -44,7 +46,6 @@ const rooms = new Map();
 
 // ---------- helpers ----------
 const rnd = n => Math.floor(Math.random() * n);
-const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = rnd(i + 1); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 function makeCode() {
   const A = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
@@ -60,15 +61,6 @@ function cleanAvatar(a) {
   const int = (v, m) => clamp(parseInt(v, 10) || 0, 0, m);
   return { color: int(a.color, 15), eyes: int(a.eyes, 9), mouth: int(a.mouth, 9), extra: int(a.extra, 9) };
 }
-function parseCustomWords(text) {
-  return String(text || '').split(/[,\n]/).map(s => s.trim()).filter(Boolean).slice(0, 500).map(s => {
-    const m = s.split(/[:=]/);
-    const ta = m[0].normalize('NFC').trim().slice(0, 40);
-    const en = (m[1] || '').trim().slice(0, 40);
-    return { ta, en, translit: '', category: 'custom', difficulty: 'custom', custom: true, lang: 'custom' };
-  }).filter(w => w.ta);
-}
-
 function connectedPlayers(room) { return [...room.players.values()].filter(p => p.connected); }
 function playerList(room) { return [...room.players.values()]; }
 
@@ -77,48 +69,15 @@ function newRoom(hostPid) {
     code: makeCode(), hostId: hostPid, players: new Map(), settings: { ...DEFAULTS },
     phase: 'lobby', round: 0, queue: [], drawerId: null, word: null, choices: null,
     endsAt: 0, phaseDuration: 0, hintTimes: [], revealed: new Set(), guessed: new Map(),
-    turnScores: {}, actions: [], current: null, usedWords: new Set(), banned: new Set(),
+    turnScores: {}, actions: [], current: null, usedWords: new Set(), usedConcepts: new Set(), decks: null, deckKey: '', banned: new Set(),
     lastTurn: null, podium: null, ratings: new Map(), created: Date.now(),
   };
   rooms.set(room.code, room);
   return room;
 }
 
-function filtered(list, s) {
-  let out = list;
-  if (s.difficulty !== 'all') out = out.filter(w => w.difficulty === s.difficulty);
-  if (s.category !== 'all') { const c = out.filter(w => w.category === s.category); out = c.length ? c : out; }
-  return out.length ? out : list;
-}
-function wordPool(room) {
-  const s = room.settings;
-  const custom = parseCustomWords(s.customWords);
-  const onlyCustom = s.customOnly && custom.length >= s.wordCount;
-  const ta = onlyCustom || s.wordLang === 'en' ? [] : filtered(TA_WORDS, s);
-  const en = onlyCustom || s.wordLang === 'ta' ? [] : filtered(EN_WORDS, s);
-  return { custom, ta, en };
-}
-function pickChoices(room) {
-  const n = room.settings.wordCount;
-  const pool = wordPool(room);
-  const avail = arr => arr.filter(w => !room.usedWords.has(w.ta));
-  let lists = { custom: avail(pool.custom), ta: avail(pool.ta), en: avail(pool.en) };
-  const total = () => lists.custom.length + lists.ta.length + lists.en.length;
-  if (total() < n) { room.usedWords.clear(); lists = { custom: pool.custom.slice(), ta: pool.ta.slice(), en: pool.en.slice() }; }
-  Object.values(lists).forEach(shuffle);
-  // slot order: in mixed mode alternate Tamil/English (random start) so every offer has both
-  const langs = room.settings.wordLang === 'mixed' ? (Math.random() < 0.5 ? ['ta', 'en'] : ['en', 'ta']) : [room.settings.wordLang];
-  const out = [];
-  let i = 0, guard = 0;
-  while (out.length < n && total() > 0 && guard++ < 100) {
-    let src;
-    if (lists.custom.length && Math.random() < 0.5) src = 'custom';
-    else { src = langs[i++ % langs.length]; if (!lists[src].length) src = ['ta', 'en', 'custom'].find(k => lists[k].length); }
-    const w = lists[src].pop();
-    if (!out.some(o => o.ta === w.ta)) out.push(w);
-  }
-  return out;
-}
+function wordPool(room) { return Words.wordPool(room, { ta: TA_WORDS, en: EN_WORDS }); }
+function pickChoices(room) { return Words.pickChoices(room, wordPool(room), rnd); }
 
 // ---------- state broadcasting ----------
 const isPunct = ch => /^[-'.]$/.test(ch);
@@ -177,13 +136,14 @@ function sendTo(room, pids, ev, data) {
 function startGame(room) {
   if (connectedPlayers(room).length < 2) return false;
   for (const p of room.players.values()) { p.score = 0; p.kickVotes.clear(); }
-  room.round = 0; room.queue = []; room.usedWords.clear(); room.podium = null; room.lastTurn = null;
+  room.round = 0; room.queue = []; Words.onGameStart(room); room.podium = null; room.lastTurn = null;
   io.to(room.code).emit('game:start');
   nextTurn(room);
   return true;
 }
 
 function resetTurnState(room) {
+  Words.releaseChoices(room);
   room.word = null; room.choices = null; room.revealed = new Set(); room.guessed = new Map();
   room.turnScores = {}; room.hintTimes = []; room.ratings = new Map();
   room.actions = []; room.current = null;
@@ -211,8 +171,9 @@ function nextTurn(room) {
 
 function chooseWord(room, idx) {
   if (room.phase !== 'choosing') return;
-  const w = room.choices[clamp(idx | 0, 0, room.choices.length - 1)];
-  room.word = w; room.usedWords.add(w.ta); room.choices = null;
+  const w = Words.takeChoice(room, idx);
+  if (!w) return;
+  room.word = w;
   room.phase = 'drawing';
   const dt = room.settings.drawTime * 1000;
   room.phaseDuration = dt;

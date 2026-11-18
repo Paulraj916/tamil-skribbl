@@ -4,7 +4,8 @@ A skribbl.io-style multiplayer **drawing & guessing game with Tamil words**, mad
 
 - Private rooms with an invite link and room code, 2 to 12 players
 - 834 hand-picked, drawable, family-friendly Tamil words in 21 categories (animals, food, festivals and culture, places, actions and more), each with an English meaning, transliteration and difficulty
-- **2,277 English words** (21 categories, easy/medium/hard) so friends and family who don't know Tamil can play too
+- **3,427 English words** (21 categories, easy/medium/hard) so friends and family who don't know Tamil can play too
+- Words are dealt from a shuffled deck in each room, so the same word is not drawn again until every eligible word has been used (including after Play again in the same room)
 - **Word language** (host setting): **Tamil** (default), **English**, or **Mixed**. In Mixed, every word offer includes both Tamil (த) and English (EN) words. The category and difficulty filters work for both lists
 - The drawer picks 1 of N Tamil words (auto-pick after 15 s). Others see one blank per Tamil letter (grapheme cluster, so கா counts as one letter), with hints that reveal letters progressively
 - Guess in **Tamil, English or Tanglish** (for example யானை / elephant / yaanai / yanai). "Close!" notices for near misses

@@ -351,6 +351,49 @@ async function waitFor(fn, ms = 8000, label = 'condition') {
       [x1, x2].forEach(c => c.s.close());
     }
 
+    // ---- no-repeat word deck, over many turns and a play-again in the same room ----
+    {
+      const WORDS = ['alpha','bravo','charlie','delta','echo','foxtrot','golf','hotel','india','juliet','kilo','lima','mike','november','oscar'];
+      const a = client('WA'), b = client('WB');
+      const wr = await emitAck(a, 'room:create', { name: 'WA', pid: a.pid });
+      await emitAck(b, 'room:join', { code: wr.code, name: 'WB', pid: b.pid });
+      a.s.emit('settings:update', { wordLang: 'en', customWords: WORDS.join(', '), customOnly: true, wordCount: 3, rounds: 10, drawTime: 30, difficulty: 'all', category: 'all' });
+      await waitFor(() => b.state && b.state.settings.customOnly, 2000, 'custom-only setting');
+      a.s.emit('game:start');
+      const picked = [];
+      let offersDistinct = true, earlyOfferRepeat = false;
+      let prevLeftover = [];
+      for (let t = 0; t < 20; t++) {
+        await waitFor(() => a.state && (a.state.phase === 'choosing' || a.state.phase === 'gameEnd'), 8000, 'next choose/end '+t);
+        if (a.state.phase === 'gameEnd') {
+          a.s.emit('game:playAgain');
+          await waitFor(() => a.state.phase === 'lobby', 3000, 'back to lobby');
+          a.s.emit('game:start');
+          await waitFor(() => a.state.phase === 'choosing', 5000, 'restart choosing');
+        }
+        const cs = [a, b];
+        const d = await waitFor(() => cs.find(c => c.state && c.state.phase === 'choosing' && c.state.choices), 4000, 'drawer choices '+t);
+        const ch = d.state.choices;
+        const ids = ch.map(w => w.ta);
+        if (new Set(ids).size !== ids.length) offersDistinct = false;
+        // leftovers only need to stay away while unused words still sit at the front of the deck
+        if (t < 4 && prevLeftover.some(x => ids.includes(x))) earlyOfferRepeat = true;
+        d.s.emit('word:choose', 0);
+        await waitFor(() => d.state.phase === 'drawing', 2000, 'drawing '+t);
+        const word = ch[0].ta;
+        picked.push(word);
+        prevLeftover = ids.filter(x => x !== word);
+        const g = cs.find(c => c !== d);
+        g.s.emit('chat', word);
+        await waitFor(() => a.state.phase === 'turnEnd' || a.state.phase === 'gameEnd' || a.state.phase === 'choosing', 4000, 'turn done '+t);
+      }
+      ok(offersDistinct, 'live game: every word offer has distinct choices');
+      ok(!earlyOfferRepeat, 'live game: offered-but-not-picked words do not return on the very next turn');
+      ok(new Set(picked.slice(0, 15)).size === 15, 'live game: first 15 drawn words in the room are unique (pool of 15, including after play-again)');
+      ok(picked.slice(15).every(w => WORDS.includes(w)), 'live game: after the pool is exhausted the deck reshuffles and play continues');
+      [a, b].forEach(c => c.s.close());
+    }
+
     // fresh room for the hint test
     const h1 = client('H1'), h2 = client('H2');
     const hr = await emitAck(h1, 'room:create', { name: 'H1', pid: h1.pid });

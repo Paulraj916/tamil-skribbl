@@ -1,14 +1,14 @@
 {
   "name": "tamil-skribbl",
   "version": "1.0.0",
-  "description": "\u0bb5\u0bb0\u0bc8\u0ba8\u0bcd\u0ba4\u0bc1 \u0b95\u0ba3\u0bcd\u0b9f\u0bc1\u0baa\u0bbf\u0b9f\u0bbf! \u2014 skribbl.io-style Tamil drawing & guessing game",
+  "description": "வரைந்து கண்டுபிடி! — skribbl.io-style Tamil drawing & guessing game",
   "main": "server.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
     "start": "node server.js",
-    "test": "node test/game.test.js",
+    "test": "node test/words.test.js && node test/game.test.js",
     "build-words": "node data/build-words.js && node data/build-words-en.js",
     "screenshots": "node test/screenshots.js"
   },
